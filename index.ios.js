@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         margin: widthOfMargin,
         backgroundColor: 'gray',
         fontSize: 20,
+        height: 40,
     },
     textPromptStyle: {
         margin: widthOfMargin,
