@@ -1,89 +1,61 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, {Component} from 'react';
-import {AppRegistry, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {AppRegistry, BackAndroid, Platform} from 'react-native';
+import {Navigator} from 'react-native-deprecated-custom-components'
+import LoginLeaf from './LoginLeaf';
+import WaitingLeaf from './WaitingLeaf';
 
-let widthOfMargin = Dimensions.get('window').width * 0.10;
+export default class NaviModule extends Component {
 
-export default class HelloWorld extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            inputedNum: '',
-            inputedPW: ''
-        };
-        this.updatePW = this.updatePW.bind(this);
+
+        this.configureScene = this.configureScene.bind(this);
+        this.renderScene = this.renderScene.bind(this);
+        this.handleBackAndroid = this.handleBackAndroid.bind(this);
     }
 
-    updateNum(newText) {
-        this.setState((state) => {
-            for (var oname in state) {
-                console.log(oname + ": " + state[oname]);
-            }
-            return {
-                inputedNum: newText,
-                aNewVariable: 'I am a new variable.'
-            };
-        }, this.updateNumDone);
+    configureScene(route) {
+        return Navigator.SceneConfigs.FadeAndroid;
     }
 
-    updateNumDone () {
-        console.log("updateNum() done.");
+    renderScene(router, navigator) {
+        this.navigator = navigator;
+        switch (router.name) {
+            case "login" :
+                return <LoginLeaf navigator={navigator}/>;
+            case "waiting":
+                return <WaitingLeaf navigator={navigator} phoneNumber={router.phoneNumber} userPW={router.userPW}/>;
+        }
     }
 
-    updatePW(newText) {
-        this.setState((state) => {
-            return {
-                inputedPW: newText,
-            };
-        });
+    handleBackAndroid() {
+        if (this.navigator.getCurrentRoutes().length > 1) {
+            this.navigator.pop();
+            return true;
+        }
+        return false;
+    }
+
+    componentDidMount() {
+        if (Platform.OS === "android") {
+            BackAndroid.addEventListener("hardwareBackPress", this.handleBackAndroid);
+        }
+    }
+
+    componentWillUnmount() {
+        if (Platform.OS === "android") {
+            BackAndroid.removeEventListener("hardwareBackPress", this.handleBackAndroid);
+        }
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <TextInput style={styles.textInputStyle}
-                           placeholder={'请输入手机号码'}
-                           onChangeText={(newText) => this.updateNum(newText)}/>
-                <Text style={styles.textPromptStyle}>
-                    您输入的手机号码： {this.state.inputedNum}
-                </Text>
-                <TextInput style={styles.textInputStyle}
-                           placeholder={'请输入密码'}
-                           password={true}
-                           onChangeText={this.updatePW}/>
-                <Text style={styles.bigTextPrompt}>确定</Text>
-            </View>
+            <Navigator
+                initialRoute={{name: 'login'}}
+                configureScene={this.configureScene}
+                renderScene={this.renderScene}/>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white',
-    },
-    textInputStyle: {
-        margin: widthOfMargin,
-        backgroundColor: 'gray',
-        fontSize: 20,
-        height: 40,
-    },
-    textPromptStyle: {
-        margin: widthOfMargin,
-        fontSize: 20,
-    },
-    bigTextPrompt: {
-        margin: widthOfMargin,
-        backgroundColor: 'gray',
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 30,
-    },
-});
-
-AppRegistry.registerComponent('HelloWorld', () => HelloWorld);
+AppRegistry.registerComponent('HelloWorld', () => NaviModule);
