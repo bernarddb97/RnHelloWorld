@@ -22,10 +22,18 @@ export default class HelloWorld extends Component {
 
     updateNum(newText) {
         this.setState((state) => {
+            for (var oname in state) {
+                console.log(oname + ": " + state[oname]);
+            }
             return {
                 inputedNum: newText,
+                aNewVariable: 'I am a new variable.'
             };
-        });
+        }, this.updateNumDone);
+    }
+
+    updateNumDone () {
+        console.log("updateNum() done.");
     }
 
     updatePW(newText) {
