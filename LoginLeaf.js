@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 
 let widthOfMargin = Dimensions.get('window').width * 0.10;
 
@@ -16,18 +16,14 @@ export default class LoginLeaf extends Component {
 
     updateNum(newText) {
         this.setState((state) => {
-            for (var oname in state) {
-                console.log(oname + ": " + state[oname]);
-            }
             return {
                 inputedNum: newText,
-                aNewVariable: 'I am a new variable.'
             };
         }, this.updateNumDone);
     }
 
-    updateNumDone () {
-        console.log("updateNum() done.");
+    updateNumDone() {
+        console.log("updateNumDone(), callback of setState() has been called.");
     }
 
     updatePW(newText) {
@@ -38,20 +34,43 @@ export default class LoginLeaf extends Component {
         });
     }
 
+    userPressConfirm() {
+        this.props.navigator.push({
+            name: 'waiting',
+            phoneNumber: this.state.inputedNum,
+            userPW: this.state.inputedPW,
+        });
+    }
+
+    userPressAddressBook() {
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <TextInput style={styles.textInputStyle}
-                           placeholder={'请输入手机号码'}
-                           onChangeText={(newText) => this.updateNum(newText)}/>
-                <Text style={styles.textPromptStyle}>
+                <TextInput
+                    style={styles.textInputStyle}
+                    placeholder={'请输入手机号码'}
+                    onChangeText={(newText) => this.updateNum(newText)}/>
+                <Text
+                    style={styles.textPromptStyle}>
                     您输入的手机号码： {this.state.inputedNum}
                 </Text>
-                <TextInput style={styles.textInputStyle}
-                           placeholder={'请输入密码'}
-                           password={true}
-                           onChangeText={this.updatePW}/>
-                <Text style={styles.bigTextPrompt}>确定</Text>
+                <TextInput
+                    style={styles.textInputStyle}
+                    placeholder={'请输入密码'}
+                    password={true}
+                    onChangeText={this.updatePW}/>
+                <Text
+                    style={styles.bigTextPrompt}
+                    onPress={() => this.userPressConfirm()}>
+                    确定
+                </Text>
+                <Text
+                    style={styles.bigTextPrompt}
+                    onPress={() => this.userPressAddressBook()}>
+                    通讯录
+                </Text>
             </View>
         );
     }
@@ -66,7 +85,6 @@ const styles = StyleSheet.create({
         margin: widthOfMargin,
         backgroundColor: 'gray',
         fontSize: 20,
-        height: 40,
     },
     textPromptStyle: {
         margin: widthOfMargin,
