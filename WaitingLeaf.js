@@ -8,10 +8,10 @@ export default class WaitingLeaf extends Component {
     }
 
     onGobackPressed() {
-        // this.props.navigator.pop();
-        this.props.navigator.replace({
-            name: "login"
-        });
+        this.props.navigator.pop();
+        // this.props.navigator.replace({
+        //     name: "login"
+        // });
     }
 
     render() {
@@ -19,11 +19,15 @@ export default class WaitingLeaf extends Component {
             <View style={styles.container}>
                 <Text
                     style={styles.textPromptStyle}>
-                    登录使用手机号码： {this.props.phoneNumber}
+                    手机号码： {this.props.phoneNumber}
                 </Text>
                 <Text
                     style={styles.textPromptStyle}>
-                    登录使用密码： {this.props.userPW}
+                    密码： {this.props.userPW}
+                </Text>
+                <Text
+                    style={styles.textPromptStyle}>
+                    默认验证码： {this.props.defaultPin}
                 </Text>
                 <Text
                     style={styles.bigTextPrompt}
@@ -33,6 +37,15 @@ export default class WaitingLeaf extends Component {
             </View>
         );
     }
+}
+
+WaitingLeaf.propTypes = {
+    phoneNumber: React.PropTypes.string,
+    userPW: React.PropTypes.any.isRequired  // 没起作用,Why?
+}
+
+WaitingLeaf.defaultProps = {
+    defaultPin: '5678'
 }
 
 const styles = StyleSheet.create({
