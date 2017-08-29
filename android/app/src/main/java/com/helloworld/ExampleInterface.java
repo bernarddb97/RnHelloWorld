@@ -1,5 +1,6 @@
 package com.helloworld;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -12,8 +13,11 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class ExampleInterface extends ReactContextBaseJavaModule {
 
+    ReactApplicationContext rnContext;
+
     public ExampleInterface(ReactApplicationContext reactContext) {
         super(reactContext);
+        rnContext = reactContext;
     }
 
     @Override
@@ -24,5 +28,9 @@ public class ExampleInterface extends ReactContextBaseJavaModule {
     @ReactMethod
     public void handleMessage(String aMessage) {
         Log.i("ExampleInterface", "received message from RN: " + aMessage);
+        
+        Intent intent = new Intent(rnContext, RnStartActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        rnContext.startActivity(intent);
     }
 }

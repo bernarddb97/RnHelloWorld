@@ -61715,12 +61715,7 @@ var LoginLeaf = function (_Component) {
             var _require = require(26            ), // 26 = react-native
                 NativeModules = _require.NativeModules;
 
-            var exampleInterface = NativeModules.ExampleInterface;
-
-            exampleInterface.handleMessage('Android Native Message');
             NativeModules.ExampleInterface.handleMessage('Android Native Message');
-
-            console.log("Has not been registered?");
         }
     }, {
         key: 'render',
@@ -61731,7 +61726,7 @@ var LoginLeaf = function (_Component) {
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 71
+                        lineNumber: 65
                     }
                 },
                 _react2.default.createElement(_reactNative.TextInput, {
@@ -61741,7 +61736,7 @@ var LoginLeaf = function (_Component) {
                         return _this2.updateNum(newText);
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 72
+                        lineNumber: 66
                     }
                 }),
                 _react2.default.createElement(
@@ -61749,7 +61744,7 @@ var LoginLeaf = function (_Component) {
                     {
                         style: styles.textPromptStyle, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 76
+                            lineNumber: 70
                         }
                     },
                     '\u60A8\u8F93\u5165\u7684\u624B\u673A\u53F7\u7801\uFF1A ',
@@ -61761,7 +61756,7 @@ var LoginLeaf = function (_Component) {
                     password: true,
                     onChangeText: this.updatePW, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 80
+                        lineNumber: 74
                     }
                 }),
                 _react2.default.createElement(
@@ -61772,7 +61767,7 @@ var LoginLeaf = function (_Component) {
                             return _this2.userPressConfirm();
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 85
+                            lineNumber: 79
                         }
                     },
                     '\u786E\u5B9A'
@@ -61785,7 +61780,7 @@ var LoginLeaf = function (_Component) {
                             return _this2.userPressAddressBook();
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 90
+                            lineNumber: 84
                         }
                     },
                     '\u901A\u8BAF\u5F55'
