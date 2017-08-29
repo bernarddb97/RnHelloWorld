@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 
 let widthOfMargin = Dimensions.get('window').width * 0.10;
 
@@ -12,6 +12,7 @@ export default class LoginLeaf extends Component {
             inputedPW: ''
         };
         this.updatePW = this.updatePW.bind(this);
+        this.jumpToWaiting = this.jumpToWaiting.bind(this);
     }
 
     updateNum(newText) {
@@ -35,8 +36,19 @@ export default class LoginLeaf extends Component {
     }
 
     userPressConfirm() {
+        Alert.alert(
+            '提示',
+            '确定使用' + this.state.inputedNum + '登录吗？',
+            [
+                {text: '确定', onPress: this.jumpToWaiting},
+                {text: '取消', onPress: (() => {}), style: 'cancel'}
+            ]
+        )
+    }
+
+    jumpToWaiting() {
         this.props.navigator.push({
-        // this.props.navigator.replace({
+            // this.props.navigator.replace({
             name: 'waiting',
             phoneNumber: this.state.inputedNum,
             userPW: this.state.inputedPW,
