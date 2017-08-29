@@ -35,7 +35,8 @@ export default class LoginLeaf extends Component {
     }
 
     userPressConfirm() {
-        this.props.navigator.push({
+        // this.props.navigator.push({
+        this.props.navigator.replace({
             name: 'waiting',
             phoneNumber: this.state.inputedNum,
             userPW: this.state.inputedPW,

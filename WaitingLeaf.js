@@ -8,7 +8,10 @@ export default class WaitingLeaf extends Component {
     }
 
     onGobackPressed() {
-        this.props.navigator.pop();
+        // this.props.navigator.pop();
+        this.props.navigator.replace({
+            name: "login"
+        });
     }
 
     render() {
@@ -25,7 +28,7 @@ export default class WaitingLeaf extends Component {
                 <Text
                     style={styles.bigTextPrompt}
                     onPress={() => this.onGobackPressed()}>
-                    通讯录
+                    返回
                 </Text>
             </View>
         );
