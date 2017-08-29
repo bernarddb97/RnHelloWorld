@@ -56,6 +56,8 @@ export default class LoginLeaf extends Component {
     }
 
     userPressAddressBook() {
+        var {NativeModules} = require('react-native');
+        NativeModules.ExampleInterface.handleMessage('Android Native Message');
     }
 
     render() {
