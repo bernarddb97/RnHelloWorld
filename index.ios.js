@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, BackAndroid, Platform} from 'react-native';
+import {AppRegistry, BackHandler, Platform} from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components'
 import LoginLeaf from './LoginLeaf';
 import WaitingLeaf from './WaitingLeaf';
@@ -38,13 +38,13 @@ export default class NaviModule extends Component {
 
     componentDidMount() {
         if (Platform.OS === "android") {
-            BackAndroid.addEventListener("hardwareBackPress", this.handleBackAndroid);
+            BackHandler.addEventListener("hardwareBackPress", this.handleBackAndroid);
         }
     }
 
     componentWillUnmount() {
         if (Platform.OS === "android") {
-            BackAndroid.removeEventListener("hardwareBackPress", this.handleBackAndroid);
+            BackHandler.removeEventListener("hardwareBackPress", this.handleBackAndroid);
         }
     }
 
