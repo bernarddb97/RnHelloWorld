@@ -61712,10 +61712,19 @@ var LoginLeaf = function (_Component) {
     }, {
         key: 'userPressAddressBook',
         value: function userPressAddressBook() {
+            _reactNative.DeviceEventEmitter.addListener('AndroidToRNMessage', this.handlerAndroidMessage.bind(this));
+
             var _require = require(26            ), // 26 = react-native
                 NativeModules = _require.NativeModules;
 
             NativeModules.ExampleInterface.handleMessage('Android Native Message');
+        }
+    }, {
+        key: 'handlerAndroidMessage',
+        value: function handlerAndroidMessage(aMessage) {
+            console.log("Message from Android Native Code: " + aMessage);
+            var msgObj = JSON.parse(aMessage);
+            this.setState({ inputedNum: msgObj.peerNumber });
         }
     }, {
         key: 'render',
@@ -61726,7 +61735,7 @@ var LoginLeaf = function (_Component) {
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 65
+                        lineNumber: 73
                     }
                 },
                 _react2.default.createElement(_reactNative.TextInput, {
@@ -61736,7 +61745,7 @@ var LoginLeaf = function (_Component) {
                         return _this2.updateNum(newText);
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 66
+                        lineNumber: 74
                     }
                 }),
                 _react2.default.createElement(
@@ -61744,7 +61753,7 @@ var LoginLeaf = function (_Component) {
                     {
                         style: styles.textPromptStyle, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 78
                         }
                     },
                     '\u60A8\u8F93\u5165\u7684\u624B\u673A\u53F7\u7801\uFF1A ',
@@ -61756,7 +61765,7 @@ var LoginLeaf = function (_Component) {
                     password: true,
                     onChangeText: this.updatePW, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 74
+                        lineNumber: 82
                     }
                 }),
                 _react2.default.createElement(
@@ -61767,7 +61776,7 @@ var LoginLeaf = function (_Component) {
                             return _this2.userPressConfirm();
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 79
+                            lineNumber: 87
                         }
                     },
                     '\u786E\u5B9A'
@@ -61780,7 +61789,7 @@ var LoginLeaf = function (_Component) {
                             return _this2.userPressAddressBook();
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 84
+                            lineNumber: 92
                         }
                     },
                     '\u901A\u8BAF\u5F55'

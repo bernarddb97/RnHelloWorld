@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Alert, Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Alert, Dimensions, StyleSheet, Text, TextInput, View, DeviceEventEmitter} from 'react-native';
 
 let widthOfMargin = Dimensions.get('window').width * 0.10;
 
@@ -56,8 +56,16 @@ export default class LoginLeaf extends Component {
     }
 
     userPressAddressBook() {
+        DeviceEventEmitter.addListener('AndroidToRNMessage', this.handlerAndroidMessage.bind(this));
+
         var {NativeModules} = require('react-native');
         NativeModules.ExampleInterface.handleMessage('Android Native Message');
+    }
+
+    handlerAndroidMessage(aMessage) {
+        console.log("Message from Android Native Code: " + aMessage);
+        let msgObj = JSON.parse(aMessage);
+        this.setState({inputedNum: msgObj.peerNumber});
     }
 
     render() {

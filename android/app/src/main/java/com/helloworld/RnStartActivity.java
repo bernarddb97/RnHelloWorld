@@ -1,5 +1,7 @@
 package com.helloworld;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,13 +20,18 @@ public class RnStartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("RnStartActivity", "View.OnClickListener.onClick() is called.");
+
+                Intent intent = new Intent();
+                intent.putExtra("peerNumber", "10086");
+                setResult(Activity.RESULT_OK, intent);
+
                 finish();
             }
         });
-    }
 
-    public void closeBtn_Click(View v) {
-        Log.i("RnStartActivity", "RnStartActivity.closeBtn_Click() is called.");
-        this.finish();
+        // Just Test
+        Intent intent = new Intent();
+        intent.putExtra("peerNumber", "10086");
+        setResult(Activity.RESULT_OK, intent);
     }
 }
