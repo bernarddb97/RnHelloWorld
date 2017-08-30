@@ -43,7 +43,6 @@ public class ExampleInterface extends ReactContextBaseJavaModule {
         super(reactContext);
         rnContext = reactContext;
         rnContext.addActivityEventListener(aeListener);
-        Log.i("ExampleInterface", "rnContext.addActivityEventListener(aeListener)");
     }
 
     @Override

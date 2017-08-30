@@ -28,10 +28,5 @@ public class RnStartActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        // Just Test
-        Intent intent = new Intent();
-        intent.putExtra("peerNumber", "10086");
-        setResult(Activity.RESULT_OK, intent);
     }
 }
