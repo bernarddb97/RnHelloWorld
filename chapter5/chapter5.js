@@ -13,8 +13,8 @@ export default class HelloWorld extends Component {
                     <View style={styles.test1} />
                     <View style={styles.test2} />
                     <View style={styles.test3} />
-                    <View style={styles.test1} />
-                    <View style={styles.test2} />
+                    <View style={{width: 40, height: 40, backgroundColor: 'green', display: 'none'}} />
+                    <View style={[styles.test2, {backgroundColor: 'cyan'}]} />
                     <Text style={styles.textStyle}>
                         ABCDE
                     </Text>

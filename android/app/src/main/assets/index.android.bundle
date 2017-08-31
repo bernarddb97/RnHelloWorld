@@ -1292,12 +1292,12 @@ var HelloWorld = function (_Component) {
                             lineNumber: 15
                         }
                     }),
-                    _react2.default.createElement(_reactNative.View, { style: styles.test1, __source: {
+                    _react2.default.createElement(_reactNative.View, { style: { width: 40, height: 40, backgroundColor: 'green', display: 'none' }, __source: {
                             fileName: _jsxFileName,
                             lineNumber: 16
                         }
                     }),
-                    _react2.default.createElement(_reactNative.View, { style: styles.test2, __source: {
+                    _react2.default.createElement(_reactNative.View, { style: [styles.test2, { backgroundColor: 'cyan' }], __source: {
                             fileName: _jsxFileName,
                             lineNumber: 17
                         }
