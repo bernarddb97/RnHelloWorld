@@ -33,7 +33,7 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonStyle: {
-        backgroundColor: 'grey',
+        backgroundColor: 'gray',
         width: 300,
         height: 70
     },
