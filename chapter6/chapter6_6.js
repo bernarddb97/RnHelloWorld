@@ -17,10 +17,12 @@ export default class HelloWorld extends Component {
 
     keyboardDidShowHandler() {
         this.setState({keyboardShown: true});
+        this.refs.bottomInput.measure(this.displayTextInputPosition);
     }
 
     keyboardDidHideHandler() {
         this.setState({keyboardShown: false});
+        this.refs.bottomInput.measure(this.displayTextInputPosition);
     }
 
     componentWillMount() {
@@ -53,6 +55,25 @@ export default class HelloWorld extends Component {
                            onEndEditing={() => this.setState({keyboardShown: false})}/>
             </View>
         );
+    }
+
+    componentDidMount() {
+        var testFunc = this.testMeasureFunction.bind(this);
+        window.setTimeout(testFunc, 1);
+    }
+
+    testMeasureFunction() {
+        this.refs.bottomInput.measure(this.displayTextInputPosition);
+    }
+
+    displayTextInputPosition(fx, fy, width, height, px, py) {
+        console.log("==========TextInput Position:==========");
+        console.log("fx=" + fx);
+        console.log("fy=" + fy);
+        console.log("width=" + width);
+        console.log("height=" + height);
+        console.log("px=" + px);
+        console.log("py=" + py);
     }
 }
 

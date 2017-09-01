@@ -1259,11 +1259,13 @@ var HelloWorld = function (_Component) {
         key: 'keyboardDidShowHandler',
         value: function keyboardDidShowHandler() {
             this.setState({ keyboardShown: true });
+            this.refs.bottomInput.measure(this.displayTextInputPosition);
         }
     }, {
         key: 'keyboardDidHideHandler',
         value: function keyboardDidHideHandler() {
             this.setState({ keyboardShown: false });
+            this.refs.bottomInput.measure(this.displayTextInputPosition);
         }
     }, {
         key: 'componentWillMount',
@@ -1285,6 +1287,7 @@ var HelloWorld = function (_Component) {
         key: 'onDismissKeyboard',
         value: function onDismissKeyboard() {
             _reactNative.Keyboard.dismiss();
+            console.log('Is it get focus: ' + this.refs.bottomInput.isFocused());
         }
     }, {
         key: 'render',
@@ -1295,30 +1298,52 @@ var HelloWorld = function (_Component) {
                 _reactNative.View,
                 { style: [styles.container, this.state.keyboardShown && styles.bumpedContainer], __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 46
+                        lineNumber: 49
                     }
                 },
                 _react2.default.createElement(
                     _reactNative.Text,
                     { style: styles.buttonStyle, onPress: this.onDismissKeyboard, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 47
+                            lineNumber: 50
                         }
                     },
                     'Dismiss Keyboard.'
                 ),
                 _react2.default.createElement(_reactNative.TextInput, { style: styles.textInputStyle, ref: 'bottomInput',
                     onFocus: function onFocus() {
-                        return _this2.setState({ bumpedUp: 1 });
+                        return _this2.setState({ keyboardShown: true });
                     },
                     onEndEditing: function onEndEditing() {
-                        return _this2.setState({ bumpedUp: 0 });
+                        return _this2.setState({ keyboardShown: false });
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 50
+                        lineNumber: 53
                     }
                 })
             );
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var testFunc = this.testMeasureFunction.bind(this);
+            window.setTimeout(testFunc, 1);
+        }
+    }, {
+        key: 'testMeasureFunction',
+        value: function testMeasureFunction() {
+            this.refs.bottomInput.measure(this.displayTextInputPosition);
+        }
+    }, {
+        key: 'displayTextInputPosition',
+        value: function displayTextInputPosition(fx, fy, width, height, px, py) {
+            console.log("==========TextInput Position:==========");
+            console.log("fx=" + fx);
+            console.log("fy=" + fy);
+            console.log("width=" + width);
+            console.log("height=" + height);
+            console.log("px=" + px);
+            console.log("py=" + py);
         }
     }]);
     return HelloWorld;
