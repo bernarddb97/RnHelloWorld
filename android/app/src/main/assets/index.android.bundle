@@ -1224,20 +1224,18 @@ babelHelpers.toConsumableArray = function (arr) {
 };
 })(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 __d(/* HelloWorld/index.android.js */function(global, require, module, exports) {
-require(12                        ); // 12 = ./chapter6/chapter6_6.js
+require(12                        ); // 12 = ./chapter7/chapter7_1.js
 }, 0, null, "HelloWorld/index.android.js");
-__d(/* HelloWorld/chapter6/chapter6_6.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* HelloWorld/chapter7/chapter7_1.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter6\\chapter6_6.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter7\\chapter7_1.js';
 
 var _react = require(13     ); // 13 = react
 
 var _react2 = babelHelpers.interopRequireDefault(_react);
 
 var _reactNative = require(27            ); // 27 = react-native
-
-var totalHeight = _reactNative.Dimensions.get('window').height;
 
 var HelloWorld = function (_Component) {
     babelHelpers.inherits(HelloWorld, _Component);
@@ -1247,103 +1245,45 @@ var HelloWorld = function (_Component) {
 
         var _this = babelHelpers.possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this, props));
 
-        _this.state = { keyboardShown: false };
-        _this.keyboardDidShowListener = null;
-        _this.keyboardDidHideListener = null;
-
-        _this.onDismissKeyboard = _this.onDismissKeyboard.bind(_this);
+        _this.state = {
+            savedItem: "00000",
+            savedItem1: "11111",
+            savedItem2: "22222"
+        };
         return _this;
     }
 
     babelHelpers.createClass(HelloWorld, [{
-        key: 'keyboardDidShowHandler',
-        value: function keyboardDidShowHandler() {
-            this.setState({ keyboardShown: true });
-            this.refs.bottomInput.measure(this.displayTextInputPosition);
-        }
-    }, {
-        key: 'keyboardDidHideHandler',
-        value: function keyboardDidHideHandler() {
-            this.setState({ keyboardShown: false });
-            this.refs.bottomInput.measure(this.displayTextInputPosition);
-        }
-    }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
-            this.keyboardDidShowListener = _reactNative.Keyboard.addListener('keyboardDidShow', this.keyboardDidShowHandler.bind(this));
-            this.keyboardDidHideListener = _reactNative.Keyboard.addListener('keyboardDidHide', this.keyboardDidHideHandler.bind(this));
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            if (this.keyboardDidShowListener !== null) {
-                this.keyboardDidShowListener.remove();
-            }
-            if (this.keyboardDidHideListener !== null) {
-                this.keyboardDidHideListener.remove();
-            }
-        }
-    }, {
-        key: 'onDismissKeyboard',
-        value: function onDismissKeyboard() {
-            _reactNative.Keyboard.dismiss();
-            console.log('Is it get focus: ' + this.refs.bottomInput.isFocused());
+            var _this2 = this;
+
+            _reactNative.AsyncStorage.setItem('key1', 67890).then(function () {
+                return _this2.setState({ savedItem: '67890' });
+            }).catch(function (error) {
+                console.log("AsyncStorage.setItem() Error: Promise.");
+                console.log("Error Message: " + error.message);
+            });
+
+            _reactNative.AsyncStorage.multiSet([['key1', 12345], ['key2', '67890']]).then(function () {
+                return _this2.setState({
+                    savedItem1: '12345',
+                    savedItem2: '67890'
+                });
+            }).catch(function (error) {
+                console.log("AsyncStorage.setItem() multiSet: Promise.");
+                console.log("Error Message Length: " + error.length);
+                console.log("Error Message: " + error[0].message);
+            });
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                _reactNative.View,
-                { style: [styles.container, this.state.keyboardShown && styles.bumpedContainer], __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 49
-                    }
-                },
-                _react2.default.createElement(
-                    _reactNative.Text,
-                    { style: styles.buttonStyle, onPress: this.onDismissKeyboard, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 50
-                        }
-                    },
-                    'Dismiss Keyboard.'
-                ),
-                _react2.default.createElement(_reactNative.TextInput, { style: styles.textInputStyle, ref: 'bottomInput',
-                    onFocus: function onFocus() {
-                        return _this2.setState({ keyboardShown: true });
-                    },
-                    onEndEditing: function onEndEditing() {
-                        return _this2.setState({ keyboardShown: false });
-                    }, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 53
-                    }
-                })
-            );
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var testFunc = this.testMeasureFunction.bind(this);
-            window.setTimeout(testFunc, 1);
-        }
-    }, {
-        key: 'testMeasureFunction',
-        value: function testMeasureFunction() {
-            this.refs.bottomInput.measure(this.displayTextInputPosition);
-        }
-    }, {
-        key: 'displayTextInputPosition',
-        value: function displayTextInputPosition(fx, fy, width, height, px, py) {
-            console.log("==========TextInput Position:==========");
-            console.log("fx=" + fx);
-            console.log("fy=" + fy);
-            console.log("width=" + width);
-            console.log("height=" + height);
-            console.log("px=" + px);
-            console.log("py=" + py);
+            return _react2.default.createElement(_reactNative.View, { style: styles.container, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 53
+                }
+            });
         }
     }]);
     return HelloWorld;
@@ -1354,11 +1294,8 @@ exports.default = HelloWorld;
 
 var styles = _reactNative.StyleSheet.create({
     container: {
-        flex: 1
-    },
-    bumpedContainer: {
-        marginTop: -240,
-        marginBottom: 240
+        flex: 1,
+        backgroundColor: 'white'
     },
     firstView: {
         height: 160,
@@ -1368,27 +1305,13 @@ var styles = _reactNative.StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         alignItems: 'stretch'
-    },
-    buttonStyle: {
-        top: 250,
-        fontSize: 30,
-        backgroundColor: 'grey'
-    },
-    textInputStyle: {
-        position: 'absolute',
-        top: totalHeight - 100,
-        left: 20,
-        width: 200,
-        height: 30,
-        fontSize: 20,
-        backgroundColor: 'grey'
     }
 });
 
 _reactNative.AppRegistry.registerComponent('HelloWorld', function () {
     return HelloWorld;
 });
-}, 12, null, "HelloWorld/chapter6/chapter6_6.js");
+}, 12, null, "HelloWorld/chapter7/chapter7_1.js");
 __d(/* react/index.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV === 'production') {
