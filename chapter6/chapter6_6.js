@@ -39,6 +39,7 @@ export default class HelloWorld extends Component {
 
     onDismissKeyboard() {
         Keyboard.dismiss();
+        console.log('Is it get focus: ' + this.refs.bottomInput.isFocused());
     }
 
     render() {
@@ -48,8 +49,8 @@ export default class HelloWorld extends Component {
                     Dismiss Keyboard.
                 </Text>
                 <TextInput style={styles.textInputStyle} ref='bottomInput'
-                           onFocus={() => this.setState({bumpedUp: 1})}
-                           onEndEditing={() => this.setState({bumpedUp: 0})}/>
+                           onFocus={() => this.setState({keyboardShown: true})}
+                           onEndEditing={() => this.setState({keyboardShown: false})}/>
             </View>
         );
     }
