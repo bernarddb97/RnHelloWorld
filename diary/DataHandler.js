@@ -12,12 +12,7 @@ export default class DataHandler extends Component {
             AsyncStorage.getAllKeys().then(
                 (keys) => {
                     if (keys.length === 0) {
-                        let stateObj = {
-                            diaryTime: '没有日记',
-                            diaryTitle: '没有日记',
-                            diaryBody: ''
-                        };
-                        resolve(stateObj);
+                        resolve(DataHandler.realDiaryList);
                     } else {
                         AsyncStorage.multiGet(keys).then(
                             (results) => {
@@ -27,39 +22,20 @@ export default class DataHandler extends Component {
                                 DataHandler.listIndex = results.length - 1;
 
                                 DataHandler.bubleSortDiaryList();
-
-                                let lastDiary = results[DataHandler.listIndex][1];
-                                let stateObj = {
-                                    diaryMood: lastDiary.diaryMood, // TODO 需要在这个时点转换成Ｉｍａｇｅ文件名吗？
-                                    diaryTime: lastDiary.diaryTime,
-                                    diaryTitle: lastDiary.diaryTitle,
-                                    diaryBody: lastDiary.diaryBody
-                                };
-                                resolve(stateObj);
+                                resolve(DataHandler.realDiaryList);
                             }
                         ).catch(
                             (error) => {
-                                console.log("DataHandler.getAllTheDiary() Failed. AsyncStorage.multiGet() Message:" + error.message);
-                                let stateObj = {
-                                    diaryTime: '没有日记',
-                                    diaryTitle: '没有日记',
-                                    diaryBody: ''
-                                };
-                                resolve(stateObj);
+                                console.log("DataHandler.getAllTheDiary() AsyncStorage.multiGet() Failed. Message:" + error.message);
+                                resolve(DataHandler.realDiaryList);
                             }
-                        )
+                        );
                     }
                 }
             ).catch(
                 (error) => {
                     console.log("DataHandler.getAllTheDiary() AsyncStorage.getAllKeys() Failed. Message:" + error.message);
-                    AsyncStorage.clear();
-                    let stateObj = {
-                        diaryTime: '没有日记',
-                        diaryTitle: '没有日记',
-                        diaryBody: ''
-                    };
-                    resolve(stateObj);
+                    resolve(DataHandler.realDiaryList);
                 }
             )
         });
@@ -83,8 +59,8 @@ export default class DataHandler extends Component {
             DataHandler.listIndex--;
             let diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
             return {
-                diaryMood: diaryObj.diaryMood, // TODO 需要在这个时点转换成Ｉｍａｇｅ文件名吗？
-                diaryTime: diaryObj.timeString,
+                diaryMood: diaryObj.diaryMood,
+                diaryTime: diaryObj.diaryTime,
                 diaryTitle: diaryObj.diaryTitle,
                 diaryBody: diaryObj.diaryBody
             };
@@ -97,8 +73,8 @@ export default class DataHandler extends Component {
             DataHandler.listIndex++;
             let diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
             return {
-                diaryMood: diaryObj.diaryMood, // TODO 需要在这个时点转换成Ｉｍａｇｅ文件名吗？
-                diaryTime: diaryObj.timeString,
+                diaryMood: diaryObj.diaryMood,
+                diaryTime: diaryObj.diaryTime,
                 diaryTitle: diaryObj.diaryTitle,
                 diaryBody: diaryObj.diaryBody
             };
@@ -106,20 +82,32 @@ export default class DataHandler extends Component {
         return null;
     }
 
+    static getDiaryAtIndex(index) {
+        DataHandler.listIndex = index;
+        let diaryObj = DataHandler.realDiaryList[index];
+        return {
+            uiCode: 2,
+            diaryMood: diaryObj.diaryMood,
+            diaryTime: diaryObj.diaryTime,
+            diaryTitle: diaryObj.diaryTitle,
+            diaryBody: diaryObj.diaryBody
+        };
+    }
+
     static saveDiary(diaryMood, diaryTitle, diaryBody) {
         console.log('DataHandle.saveDiary() is called.');
         return new Promise(function (resolve, reject) {
             let sysDate = new Date();
-            let timeString = sysDate.getFullYear() + "年" + sysDate.getMonth() + "月" + sysDate.getDate() + "日 星期" + sysDate.getDay()
-                + "时间 " + sysDate.getHours() + ":" + sysDate.getMinutes() + ":" + sysDate.getSeconds();
-            let diaryObj = Object();
+            let timeString = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月" + sysDate.getDate() + "日 "
+                + sysDate.getHours() + ":" + sysDate.getMinutes() + ":" + sysDate.getSeconds();
+
+            let diaryObj = new Object();
             diaryObj.index = Date.parse(sysDate);
-            diaryObj.diaryTime = sysDate;
+            diaryObj.diaryTime = timeString;
             diaryObj.diaryMood = diaryMood;
             diaryObj.diaryTitle = diaryTitle;
             diaryObj.diaryBody = diaryBody;
-            diaryObj.timeString = timeString;
-            diaryObj.sectionID = "sectionID"; // TODO 下一章时使用
+            diaryObj.sectionID = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月";
 
             AsyncStorage.setItem('' + diaryObj.index, JSON.stringify(diaryObj)).then(
                 () => {
@@ -127,14 +115,10 @@ export default class DataHandler extends Component {
                     DataHandler.realDiaryList[totalLength] = diaryObj;
                     DataHandler.listIndex = totalLength;
 
-                    let stateObj = {
+                    resolve({
                         uiCode: 1,
-                        diaryMood: diaryMood, // TODO 需要在这个时点转换成Ｉｍａｇｅ文件名吗？
-                        diaryTime: timeString,
-                        diaryTitle: diaryTitle,
-                        diaryBody: diaryBody
-                    };
-                    resolve(stateObj);
+                        diaryList: DataHandler.realDiaryList
+                    });
                 }
             ).catch(
                 (error) => {

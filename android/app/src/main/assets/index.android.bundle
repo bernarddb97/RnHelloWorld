@@ -1224,12 +1224,12 @@ babelHelpers.toConsumableArray = function (arr) {
 };
 })(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 __d(/* HelloWorld/index.android.js */function(global, require, module, exports) {
-require(12                        ); // 12 = ./chapter8/chapter8_1.js
+require(12                 ); // 12 = ./diary/DiaryMain
 }, 0, null, "HelloWorld/index.android.js");
-__d(/* HelloWorld/chapter8/chapter8_1.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* HelloWorld/diary/DiaryMain.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter8\\chapter8_1.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryMain.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -1237,130 +1237,169 @@ var _react2 = babelHelpers.interopRequireDefault(_react);
 
 var _reactNative = require(27            ); // 27 = react-native
 
-var HelloWorld = function (_Component) {
-    babelHelpers.inherits(HelloWorld, _Component);
+var _DiaryList = require(310          ); // 310 = ./DiaryList
 
-    function HelloWorld(props) {
-        babelHelpers.classCallCheck(this, HelloWorld);
+var _DiaryList2 = babelHelpers.interopRequireDefault(_DiaryList);
 
-        var _this = babelHelpers.possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this, props));
+var _DiaryReader = require(313            ); // 313 = ./DiaryReader
 
-        _this.onScroll = _this.onScroll.bind(_this);
+var _DiaryReader2 = babelHelpers.interopRequireDefault(_DiaryReader);
+
+var _DiaryWriter = require(314            ); // 314 = ./DiaryWriter
+
+var _DiaryWriter2 = babelHelpers.interopRequireDefault(_DiaryWriter);
+
+var _DataHandler = require(319            ); // 319 = ./DataHandler
+
+var _DataHandler2 = babelHelpers.interopRequireDefault(_DataHandler);
+
+var DiaryMain = function (_Component) {
+    babelHelpers.inherits(DiaryMain, _Component);
+
+    function DiaryMain(props) {
+        babelHelpers.classCallCheck(this, DiaryMain);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (DiaryMain.__proto__ || Object.getPrototypeOf(DiaryMain)).call(this, props));
+
+        _this.state = {
+            uiCode: 1,
+            diaryList: [],
+            diaryMood: null,
+            diaryTime: 'Reading...',
+            diaryTitle: 'Reading...',
+            diaryBody: 'Reading...'
+        };
+
+        _this.bindAllMyFunction();
+        _DataHandler2.default.getAllTheDiary().then(function (result) {
+            _this.setState(result);
+        }).catch(function (error) {
+            console.log(error);
+        });
         return _this;
     }
 
-    babelHelpers.createClass(HelloWorld, [{
-        key: 'onScroll',
-        value: function onScroll(aEvent) {
-            console.log(aEvent.nativeEvent);
+    babelHelpers.createClass(DiaryMain, [{
+        key: 'bindAllMyFunction',
+        value: function bindAllMyFunction() {
+            this.selectListItem = this.selectListItem.bind(this);
+            this.writeDiary = this.writeDiary.bind(this);
+            this.returnPressed = this.returnPressed.bind(this);
+            this.saveDiary = this.saveDiary.bind(this);
+            this.readingPreviousPressed = this.readingPreviousPressed.bind(this);
+            this.readingNextPressed = this.readingNextPressed.bind(this);
+            this.searchKeyword = this.searchKeyword.bind(this);
         }
     }, {
-        key: 'onRefresh',
-        value: function onRefresh() {
-            console.log("onRefresh() is called.");
+        key: 'readingPreviousPressed',
+        value: function readingPreviousPressed() {
+            var stateObj = _DataHandler2.default.getPreviousDiary();
+            if (stateObj !== null) {
+                this.setState(stateObj);
+            }
+        }
+    }, {
+        key: 'readingNextPressed',
+        value: function readingNextPressed() {
+            var stateObj = _DataHandler2.default.getNextDiary();
+            if (stateObj !== null) {
+                this.setState(stateObj);
+            }
+        }
+    }, {
+        key: 'returnPressed',
+        value: function returnPressed() {
+            this.setState({ uiCode: 1 });
+        }
+    }, {
+        key: 'saveDiary',
+        value: function saveDiary(diaryMood, diaryTitle, diaryBody) {
+            var _this2 = this;
+
+            _DataHandler2.default.saveDiary(diaryMood, diaryTitle, diaryBody).then(function (result) {
+                _this2.setState(result);
+            }).catch(function (error) {
+                console.log("Save Diary failed. Message:" + error.message);
+            });
+
+            _reactNative.Alert.alert('通知', '日记保存成功。', [{ text: '关闭' }]);
+        }
+    }, {
+        key: 'writeDiary',
+        value: function writeDiary() {
+            this.setState({ uiCode: 3 });
+        }
+    }, {
+        key: 'searchKeyword',
+        value: function searchKeyword(newText) {
+            console.log("Search Keyword is: " + newText);
+        }
+    }, {
+        key: 'selectListItem',
+        value: function selectListItem(rowID) {
+            this.setState(_DataHandler2.default.getDiaryAtIndex(rowID));
+        }
+    }, {
+        key: 'showDiaryList',
+        value: function showDiaryList() {
+            return _react2.default.createElement(_DiaryList2.default, { selectListItem: this.selectListItem,
+                writeDiary: this.writeDiary,
+                diaryList: this.state.diaryList,
+                searchKeyword: this.searchKeyword, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 94
+                }
+            });
+        }
+    }, {
+        key: 'showDiaryReader',
+        value: function showDiaryReader() {
+            return _react2.default.createElement(_DiaryReader2.default, { diaryMood: this.state.diaryMood,
+                diaryTime: this.state.diaryTime,
+                diaryTitle: this.state.diaryTitle,
+                diaryBody: this.state.diaryBody,
+                returnPressed: this.returnPressed,
+                readingPreviousPressed: this.readingPreviousPressed,
+                readingNextPressed: this.readingNextPressed, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 101
+                }
+            });
+        }
+    }, {
+        key: 'showDiaryWriter',
+        value: function showDiaryWriter() {
+            return _react2.default.createElement(_DiaryWriter2.default, { returnPressed: this.returnPressed,
+                saveDiary: this.saveDiary, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 111
+                }
+            });
         }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                _reactNative.View,
-                { style: styles.container, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 21
-                    }
-                },
-                _react2.default.createElement(
-                    _reactNative.ScrollView,
-                    { style: styles.scrollView,
-                        onScroll: this.onScroll,
-                        refreshControl: _react2.default.createElement(_reactNative.RefreshControl, { refreshing: true,
-                            onRefresh: this.onRefresh,
-                            title: 'Loading...',
-                            tintColor: '#FFFFFF',
-                            colors: ['#FF0000', '#00FF00', '#0000FF'],
-                            progressBackgroundColor: '#CCCCCC', __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 25
-                            }
-                        }), __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 22
-                        }
-                    },
-                    _react2.default.createElement(
-                        _reactNative.View,
-                        { style: styles.aView, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 32
-                            }
-                        },
-                        _react2.default.createElement(
-                            _reactNative.ScrollView,
-                            { style: styles.midScrollView, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 33
-                                }
-                            },
-                            _react2.default.createElement(_reactNative.View, { style: styles.bVeiw, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 34
-                                }
-                            }),
-                            _react2.default.createElement(_reactNative.View, { style: styles.cVeiw, __source: {
-                                    fileName: _jsxFileName,
-                                    lineNumber: 35
-                                }
-                            })
-                        )
-                    )
-                )
-            );
+            if (this.state.uiCode === 1) {
+                return this.showDiaryList();
+            }
+            if (this.state.uiCode === 2) {
+                return this.showDiaryReader();
+            }
+            if (this.state.uiCode === 3) {
+                return this.showDiaryWriter();
+            }
         }
     }]);
-    return HelloWorld;
+    return DiaryMain;
 }(_react.Component);
 
-exports.default = HelloWorld;
+exports.default = DiaryMain;
 
-
-var styles = _reactNative.StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'white'
-    },
-    scrollView: {
-        backgroundColor: '#CCCCCC'
-    },
-    aView: {
-        height: 375,
-        backgroundColor: '#00FFFF'
-    },
-    midScrollView: {
-        height: 150,
-        borderWidth: 2,
-        borderColor: 'red',
-        backgroundColor: '#FFFF00'
-    },
-    bVeiw: {
-        width: 300,
-        height: 40,
-        borderWidth: 2,
-        borderColor: 'blue',
-        backgroundColor: '#DD00DD'
-    },
-    cVeiw: {
-        width: 300,
-        height: 80,
-        borderWidth: 2,
-        borderColor: 'blue',
-        backgroundColor: '#00DDDD'
-    }
-});
 
 _reactNative.AppRegistry.registerComponent('HelloWorld', function () {
-    return HelloWorld;
+    return DiaryMain;
 });
-}, 12, null, "HelloWorld/chapter8/chapter8_1.js");
+}, 12, null, "HelloWorld/diary/DiaryMain.js");
 __d(/* react/index.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -52615,5 +52654,804 @@ var _require = require(66           ), // 66 = ReactNative
 
 module.exports = __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.takeSnapshot;
 }, 309, null, "takeSnapshot");
+__d(/* HelloWorld/diary/DiaryList.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryList.js';
+
+var _react = require(13     ); // 13 = react
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require(27            ); // 27 = react-native
+
+var _DiaryStyles = require(311            ); // 311 = ./DiaryStyles
+
+var _DiaryStyles2 = babelHelpers.interopRequireDefault(_DiaryStyles);
+
+var angryMood = require(312                         ); // 312 = ../image/madagascar_01.png
+
+var DiaryList = function (_Component) {
+    babelHelpers.inherits(DiaryList, _Component);
+
+    function DiaryList(props) {
+        babelHelpers.classCallCheck(this, DiaryList);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (DiaryList.__proto__ || Object.getPrototypeOf(DiaryList)).call(this, props));
+
+        _this.state = {
+            diaryListDS: new _reactNative.ListView.DataSource({
+                rowHasChanged: function rowHasChanged(oldRow, newRow) {
+                    return oldRow !== newRow;
+                }
+            })
+        };
+        _this.updateSearchKeyword = _this.updateSearchKeyword.bind(_this);
+        _this.renderListItem = _this.renderListItem.bind(_this);
+        return _this;
+    }
+
+    babelHelpers.createClass(DiaryList, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            console.log("DiaryList.componentWillMount() is called.");
+            if (this.props.diaryList !== null) {
+                this.setState({
+                    diaryListDS: this.state.diaryListDS.cloneWithRows(this.props.diaryList)
+                });
+            }
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            console.log("DiaryList.componentWillReceiveProps() is called.");
+            this.setState({
+                diaryListDS: this.state.diaryListDS.cloneWithRows(nextProps.diaryList)
+            });
+        }
+    }, {
+        key: 'updateSearchKeyword',
+        value: function updateSearchKeyword(newText) {
+            this.props.updateSearchKeyword(newText);
+        }
+    }, {
+        key: 'renderListItem',
+        value: function renderListItem(rowData, sectionID, rowID) {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactNative.TouchableOpacity,
+                { onPress: function onPress() {
+                        return _this2.props.selectListItem(rowID);
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 42
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _DiaryStyles2.default.secondRow, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 43
+                        }
+                    },
+                    _react2.default.createElement(_reactNative.Image, { style: _DiaryStyles2.default.moodStyle, source: rowData.diaryMood, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 44
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _DiaryStyles2.default.subViewInReader, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 45
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.textInReader, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 46
+                                }
+                            },
+                            rowData.diaryTitle
+                        ),
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.textInReader, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 49
+                                }
+                            },
+                            rowData.diaryTime
+                        )
+                    )
+                )
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 60
+                    }
+                },
+                _react2.default.createElement(_reactNative.StatusBar, { hidden: true, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 61
+                    }
+                }),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _DiaryStyles2.default.firstRow, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 62
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: { borderWidth: 1 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 63
+                            }
+                        },
+                        _react2.default.createElement(_reactNative.TextInput, { placeholder: '\u8F93\u5165\u641C\u7D22\u5173\u952E\u5B57', style: _DiaryStyles2.default.searchBarTextInput, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 64
+                            }
+                        })
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.props.writeDiary, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 66
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.middleButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 67
+                                }
+                            },
+                            '\u5199\u65E5\u8BB0'
+                        )
+                    )
+                ),
+                this.props.diaryList.length > 0 ? _react2.default.createElement(_reactNative.ListView, { dataSource: this.state.diaryListDS, renderRow: this.renderListItem, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 74
+                    }
+                }) : _react2.default.createElement(
+                    _reactNative.View,
+                    { style: { flex: 1, justifyContent: 'center' }, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 75
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: { fontSize: 18 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 76
+                            }
+                        },
+                        '\u8FD8\u6CA1\u6709\u65E5\u8BB0\uFF0C\u5FEB\u53BB\u5199\u4E00\u7BC7\u5427\u3002'
+                    )
+                )
+            );
+        }
+    }]);
+    return DiaryList;
+}(_react.Component);
+
+exports.default = DiaryList;
+}, 310, null, "HelloWorld/diary/DiaryList.js");
+__d(/* HelloWorld/diary/DiaryStyles.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = undefined;
+
+var _reactNative = require(27            ); // 27 = react-native
+
+var totalWidth = _reactNative.Dimensions.get('window').width;
+var totalHeight = _reactNative.Dimensions.get('window').height;
+var textSize = totalWidth / 18;
+var readingUITitleHeight = textSize * 6;
+var diaryBodyLine = totalHeight / textSize - 6;
+var returnButtonHeight = textSize * 5;
+var DiaryStyles = _reactNative.StyleSheet.create({
+    container: {
+        top: 2,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        borderColor: 'black',
+        borderWidth: 1 },
+    firstRow: {
+        height: textSize * 1.4 + 2,
+        flexDirection: 'row',
+        width: totalWidth - 4,
+        justifyContent: 'space-around',
+        margin: 2 },
+    longButton: {
+        height: textSize * 1.4,
+        backgroundColor: 'gray',
+        width: textSize * 10,
+        borderRadius: 8,
+        textAlign: 'center',
+        fontSize: textSize },
+    middleButton: {
+        height: textSize * 1.4,
+        backgroundColor: 'gray',
+        width: textSize * 5,
+        borderRadius: 8,
+        textAlign: 'center',
+        fontSize: textSize
+    },
+    diaryAbstractList: {
+        flex: 1,
+        margin: 4,
+        width: totalWidth - 4,
+        justifyContent: 'center',
+        backgroundColor: 'grey'
+    },
+    diaryBodyStyle: {
+        flex: 1,
+        width: totalWidth - 8,
+        fontSize: textSize,
+        backgroundColor: 'grey',
+        margin: 4
+    },
+    smallButton: {
+        height: textSize * 1.4,
+        backgroundColor: 'gray',
+        width: textSize * 3,
+        borderRadius: 8,
+        textAlign: 'center',
+        fontSize: textSize
+    },
+    moodStyle: {
+        height: textSize * 3.2,
+        width: textSize * 3.2,
+        borderRadius: textSize * 1.6
+    },
+    subViewInReader: {
+        width: totalWidth - 5 - textSize * 3.2
+    },
+    textInReader: {
+        height: textSize * 1.4,
+        fontSize: textSize,
+        backgroundColor: 'grey',
+        margin: 2
+    },
+    secondRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'gray',
+        borderRadius: 4,
+        margin: 1
+    },
+    titleInputStyle: {
+        fontSize: textSize,
+        backgroundColor: 'grey',
+        height: textSize * 2.4,
+        color: 'black',
+        margin: 4,
+        borderWidth: 2,
+        width: totalWidth - 12,
+        borderColor: 'black'
+    },
+    searchBarTextInput: {
+        backgroundColor: 'white',
+        borderColor: 'black',
+        height: textSize * 1.4,
+        width: textSize * 10,
+        paddingTop: 0,
+        paddingBottom: 0,
+        fontSize: 14
+    }
+});
+exports.default = DiaryStyles;
+}, 311, null, "HelloWorld/diary/DiaryStyles.js");
+__d(/* HelloWorld/image/madagascar_01.png */function(global, require, module, exports) {module.exports=require(168                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/image","width":128,"height":128,"scales":[1],"hash":"b8b05e19fae36a43535a058a1a8da0a7","name":"madagascar_01","type":"png"}); // 168 = react-native/Libraries/Image/AssetRegistry
+}, 312, null, "HelloWorld/image/madagascar_01.png");
+__d(/* HelloWorld/diary/DiaryReader.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryReader.js';
+
+var _react = require(13     ); // 13 = react
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require(27            ); // 27 = react-native
+
+var _DiaryStyles = require(311            ); // 311 = ./DiaryStyles
+
+var _DiaryStyles2 = babelHelpers.interopRequireDefault(_DiaryStyles);
+
+var angryMood = require(312                         ); // 312 = ../image/madagascar_01.png
+
+var DiaryReader = function (_Component) {
+    babelHelpers.inherits(DiaryReader, _Component);
+
+    function DiaryReader(props) {
+        babelHelpers.classCallCheck(this, DiaryReader);
+        return babelHelpers.possibleConstructorReturn(this, (DiaryReader.__proto__ || Object.getPrototypeOf(DiaryReader)).call(this, props));
+    }
+
+    babelHelpers.createClass(DiaryReader, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 15
+                    }
+                },
+                _react2.default.createElement(_reactNative.StatusBar, { hidden: true, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 16
+                    }
+                }),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _DiaryStyles2.default.firstRow, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 17
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.props.returnPressed, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 18
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.middleButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 19
+                                }
+                            },
+                            '\u8FD4\u56DE'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.props.readingPreviousPressed, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 23
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.middleButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 24
+                                }
+                            },
+                            '\u4E0A\u4E00\u7BC7'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.props.readingNextPressed, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 28
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.middleButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 29
+                                }
+                            },
+                            '\u4E0B\u4E00\u7BC7'
+                        )
+                    )
+                ),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _DiaryStyles2.default.secondRow, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 34
+                        }
+                    },
+                    _react2.default.createElement(_reactNative.Image, { style: _DiaryStyles2.default.moodStyle, source: this.props.diaryMood, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 35
+                        }
+                    }),
+                    _react2.default.createElement(
+                        _reactNative.View,
+                        { style: _DiaryStyles2.default.subViewInReader, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 36
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.textInReader, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 37
+                                }
+                            },
+                            this.props.diaryTitle
+                        ),
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.textInReader, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 40
+                                }
+                            },
+                            this.props.diaryTime
+                        )
+                    )
+                ),
+                _react2.default.createElement(_reactNative.TextInput, { style: [_DiaryStyles2.default.diaryBodyStyle, { color: 'black' }], multiline: true, editable: false,
+                    value: this.props.diaryBody, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 45
+                    }
+                })
+            );
+        }
+    }]);
+    return DiaryReader;
+}(_react.Component);
+
+exports.default = DiaryReader;
+}, 313, null, "HelloWorld/diary/DiaryReader.js");
+__d(/* HelloWorld/diary/DiaryWriter.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryWriter.js';
+
+var _react = require(13     ); // 13 = react
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require(27            ); // 27 = react-native
+
+var _DiaryStyles = require(311            ); // 311 = ./DiaryStyles
+
+var _DiaryStyles2 = babelHelpers.interopRequireDefault(_DiaryStyles);
+
+var angryMood = require(312                         ); // 312 = ../image/madagascar_01.png
+var peaceMood = require(315                         ); // 315 = ../image/madagascar_02.png
+var happyMood = require(316                         ); // 316 = ../image/madagascar_03.png
+var sadMood = require(317                         ); // 317 = ../image/madagascar_04.png
+var miseryMood = require(318                         ); // 318 = ../image/madagascar_05.png
+
+var DiaryWriter = function (_Component) {
+    babelHelpers.inherits(DiaryWriter, _Component);
+
+    function DiaryWriter(props) {
+        babelHelpers.classCallCheck(this, DiaryWriter);
+
+        var _this = babelHelpers.possibleConstructorReturn(this, (DiaryWriter.__proto__ || Object.getPrototypeOf(DiaryWriter)).call(this, props));
+
+        _this.moodCode = 1;
+        _this.diaryMood = null;
+        _this.diaryTitle = null;
+        _this.diaryBody = null;
+
+        _this.state = {
+            moodText: '请选择心情'
+        };
+        return _this;
+    }
+
+    babelHelpers.createClass(DiaryWriter, [{
+        key: 'returnPressed',
+        value: function returnPressed() {
+            _reactNative.Alert.alert('确认', '确定要返回日记列表吗？', [{ text: '确定', onPress: this.props.returnPressed }, { text: '取消' }]);
+        }
+    }, {
+        key: 'selectMood',
+        value: function selectMood() {
+            if (this.moodCode === 4) {
+                this.moodCode = 0;
+            } else {
+                this.moodCode++;
+            }
+
+            var selectMood = void 0;
+            switch (this.moodCode) {
+                case 0:
+                    selectMood = '现在的心情：愤怒';
+                    this.diaryMood = angryMood;
+                    break;
+                case 1:
+                    selectMood = '现在的心情：平静';
+                    this.diaryMood = peaceMood;
+                    break;
+                case 2:
+                    selectMood = '现在的心情：高兴';
+                    this.diaryMood = happyMood;
+                    break;
+                case 3:
+                    selectMood = '现在的心情：悲伤';
+                    this.diaryMood = sadMood;
+                    break;
+                case 4:
+                    selectMood = '现在的心情：痛苦';
+                    this.diaryMood = miseryMood;
+                    break;
+                default:
+                    selectMood = '现在的心情：平静';
+                    this.diaryMood = peaceMood;
+                    break;
+            }
+
+            this.setState({ moodText: selectMood });
+        }
+    }, {
+        key: 'saveDiaryPressed',
+        value: function saveDiaryPressed() {
+            if (this.diaryMood == null || this.diaryTitle == null || this.diaryBody == null) {
+                _reactNative.Alert.alert('错误', '请选择心情，填写日记题目和正文。', [{ text: '关闭' }]);
+            } else {
+                this.props.saveDiary(this.diaryMood, this.diaryTitle, this.diaryBody);
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 91
+                    }
+                },
+                _react2.default.createElement(_reactNative.StatusBar, { hidden: true, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 92
+                    }
+                }),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: _DiaryStyles2.default.firstRow, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 93
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.returnPressed.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 94
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.smallButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 95
+                                }
+                            },
+                            '\u8FD4\u56DE'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.selectMood.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 99
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.longButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 100
+                                }
+                            },
+                            this.state.moodText
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.saveDiaryPressed.bind(this), __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 104
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.smallButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 105
+                                }
+                            },
+                            '\u4FDD\u5B58'
+                        )
+                    )
+                ),
+                _react2.default.createElement(_reactNative.TextInput, { style: _DiaryStyles2.default.titleInputStyle, placeholder: '日记标题', onChangeText: function onChangeText(text) {
+                        return _this2.diaryTitle = text;
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 110
+                    }
+                }),
+                _react2.default.createElement(_reactNative.TextInput, { style: _DiaryStyles2.default.diaryBodyStyle, multiline: true, placeholder: '日记正文', onChangeText: function onChangeText(text) {
+                        return _this2.diaryBody = text;
+                    }, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 111
+                    }
+                })
+            );
+        }
+    }]);
+    return DiaryWriter;
+}(_react.Component);
+
+exports.default = DiaryWriter;
+}, 314, null, "HelloWorld/diary/DiaryWriter.js");
+__d(/* HelloWorld/image/madagascar_02.png */function(global, require, module, exports) {module.exports=require(168                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/image","width":128,"height":128,"scales":[1],"hash":"2ec337a83948f2ee7f11b74cafbd3850","name":"madagascar_02","type":"png"}); // 168 = react-native/Libraries/Image/AssetRegistry
+}, 315, null, "HelloWorld/image/madagascar_02.png");
+__d(/* HelloWorld/image/madagascar_03.png */function(global, require, module, exports) {module.exports=require(168                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/image","width":128,"height":128,"scales":[1],"hash":"a1a3b861e2259e8cb2884ea7d26de3b4","name":"madagascar_03","type":"png"}); // 168 = react-native/Libraries/Image/AssetRegistry
+}, 316, null, "HelloWorld/image/madagascar_03.png");
+__d(/* HelloWorld/image/madagascar_04.png */function(global, require, module, exports) {module.exports=require(168                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/image","width":128,"height":128,"scales":[1],"hash":"31f52138927f87be622ef573fce397d9","name":"madagascar_04","type":"png"}); // 168 = react-native/Libraries/Image/AssetRegistry
+}, 317, null, "HelloWorld/image/madagascar_04.png");
+__d(/* HelloWorld/image/madagascar_05.png */function(global, require, module, exports) {module.exports=require(168                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/image","width":128,"height":128,"scales":[1],"hash":"acaed480eb14882227f4a065cfce7efe","name":"madagascar_05","type":"png"}); // 168 = react-native/Libraries/Image/AssetRegistry
+}, 318, null, "HelloWorld/image/madagascar_05.png");
+__d(/* HelloWorld/diary/DataHandler.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require(13     ); // 13 = react
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require(27            ); // 27 = react-native
+
+var DataHandler = function (_Component) {
+    babelHelpers.inherits(DataHandler, _Component);
+
+    function DataHandler() {
+        babelHelpers.classCallCheck(this, DataHandler);
+        return babelHelpers.possibleConstructorReturn(this, (DataHandler.__proto__ || Object.getPrototypeOf(DataHandler)).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(DataHandler, null, [{
+        key: 'getAllTheDiary',
+        value: function getAllTheDiary() {
+            console.log('DataHandle.getAllTheDiary() is called.');
+            return new Promise(function (resolve, reject) {
+                _reactNative.AsyncStorage.getAllKeys().then(function (keys) {
+                    if (keys.length === 0) {
+                        resolve(DataHandler.realDiaryList);
+                    } else {
+                        _reactNative.AsyncStorage.multiGet(keys).then(function (results) {
+                            for (var idx = 0; idx < results.length; idx++) {
+                                DataHandler.realDiaryList[idx] = results[idex][1];
+                            }
+                            DataHandler.listIndex = results.length - 1;
+
+                            DataHandler.bubleSortDiaryList();
+                            resolve(DataHandler.realDiaryList);
+                        }).catch(function (error) {
+                            console.log("DataHandler.getAllTheDiary() AsyncStorage.multiGet() Failed. Message:" + error.message);
+                            resolve(DataHandler.realDiaryList);
+                        });
+                    }
+                }).catch(function (error) {
+                    console.log("DataHandler.getAllTheDiary() AsyncStorage.getAllKeys() Failed. Message:" + error.message);
+                    resolve(DataHandler.realDiaryList);
+                });
+            });
+        }
+    }, {
+        key: 'bubleSortDiaryList',
+        value: function bubleSortDiaryList() {
+            var tempObj = void 0;
+            for (var i = 0; i < DataHandler.realDiaryList.length; i++) {
+                for (var j = 0; j < DataHandler.realDiaryList.length - i - 1; j++) {
+                    if (DataHandler.realDiaryList[j].index > DataHandler.realDiaryList[j + 1].index) {
+                        tempObj = DataHandler.realDiaryList[j];
+                        DataHandler.realDiaryList[j] = DataHandler.realDiaryList[j + 1];
+                        DataHandler.realDiaryList[j + 1] = tempObj;
+                    }
+                }
+            }
+        }
+    }, {
+        key: 'getPreviousDiary',
+        value: function getPreviousDiary() {
+            if (DataHandler.listIndex > 0) {
+                DataHandler.listIndex--;
+                var diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
+                return {
+                    diaryMood: diaryObj.diaryMood,
+                    diaryTime: diaryObj.diaryTime,
+                    diaryTitle: diaryObj.diaryTitle,
+                    diaryBody: diaryObj.diaryBody
+                };
+            }
+            return null;
+        }
+    }, {
+        key: 'getNextDiary',
+        value: function getNextDiary() {
+            if (DataHandler.listIndex < DataHandler.realDiaryList.length - 1) {
+                DataHandler.listIndex++;
+                var diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
+                return {
+                    diaryMood: diaryObj.diaryMood,
+                    diaryTime: diaryObj.diaryTime,
+                    diaryTitle: diaryObj.diaryTitle,
+                    diaryBody: diaryObj.diaryBody
+                };
+            }
+            return null;
+        }
+    }, {
+        key: 'getDiaryAtIndex',
+        value: function getDiaryAtIndex(index) {
+            DataHandler.listIndex = index;
+            var diaryObj = DataHandler.realDiaryList[index];
+            return {
+                uiCode: 2,
+                diaryMood: diaryObj.diaryMood,
+                diaryTime: diaryObj.diaryTime,
+                diaryTitle: diaryObj.diaryTitle,
+                diaryBody: diaryObj.diaryBody
+            };
+        }
+    }, {
+        key: 'saveDiary',
+        value: function saveDiary(diaryMood, diaryTitle, diaryBody) {
+            console.log('DataHandle.saveDiary() is called.');
+            return new Promise(function (resolve, reject) {
+                var sysDate = new Date();
+                var timeString = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月" + sysDate.getDate() + "日 " + sysDate.getHours() + ":" + sysDate.getMinutes() + ":" + sysDate.getSeconds();
+
+                var diaryObj = new Object();
+                diaryObj.index = Date.parse(sysDate);
+                diaryObj.diaryTime = timeString;
+                diaryObj.diaryMood = diaryMood;
+                diaryObj.diaryTitle = diaryTitle;
+                diaryObj.diaryBody = diaryBody;
+                diaryObj.sectionID = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月";
+
+                _reactNative.AsyncStorage.setItem('' + diaryObj.index, JSON.stringify(diaryObj)).then(function () {
+                    var totalLength = DataHandler.realDiaryList.length;
+                    DataHandler.realDiaryList[totalLength] = diaryObj;
+                    DataHandler.listIndex = totalLength;
+
+                    resolve({
+                        uiCode: 1,
+                        diaryList: DataHandler.realDiaryList
+                    });
+                }).catch(function (error) {
+                    console.log("DataHandler.saveDiary() Failed. Message:" + error.message);
+                });
+            });
+        }
+    }]);
+    return DataHandler;
+}(_react.Component);
+
+DataHandler.realDiaryList = [];
+DataHandler.listIndex = 0;
+exports.default = DataHandler;
+}, 319, null, "HelloWorld/diary/DataHandler.js");
 ;require(76);
 ;require(0);

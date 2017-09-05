@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, Alert} from 'react-native';
+import {Alert, AppRegistry} from 'react-native';
 import DiaryList from './DiaryList';
 import DiaryReader from './DiaryReader';
 import DiaryWriter from './DiaryWriter';
@@ -11,6 +11,7 @@ export default class DiaryMain extends Component {
         super(props);
         this.state = {
             uiCode: 1,
+            diaryList: [],
             diaryMood: null,
             diaryTime: 'Reading...',
             diaryTitle: 'Reading...',
@@ -33,9 +34,10 @@ export default class DiaryMain extends Component {
         this.selectListItem = this.selectListItem.bind(this);
         this.writeDiary = this.writeDiary.bind(this);
         this.returnPressed = this.returnPressed.bind(this);
-        this.saveDiaryAndReturn = this.saveDiaryAndReturn.bind(this);
+        this.saveDiary = this.saveDiary.bind(this);
         this.readingPreviousPressed = this.readingPreviousPressed.bind(this);
         this.readingNextPressed = this.readingNextPressed.bind(this);
+        this.searchKeyword = this.searchKeyword.bind(this);
     }
 
     readingPreviousPressed() {
@@ -56,7 +58,7 @@ export default class DiaryMain extends Component {
         this.setState({uiCode: 1});
     }
 
-    saveDiaryAndReturn(diaryMood, diaryTitle, diaryBody) {
+    saveDiary(diaryMood, diaryTitle, diaryBody) {
         DataHandle.saveDiary(diaryMood, diaryTitle, diaryBody).then(
             (result) => {
                 this.setState(result);
@@ -65,7 +67,7 @@ export default class DiaryMain extends Component {
             (error) => {
                 console.log("Save Diary failed. Message:" + error.message);
             }
-        )
+        );
 
         Alert.alert(
             '通知',
@@ -80,25 +82,34 @@ export default class DiaryMain extends Component {
         this.setState({uiCode: 3});
     }
 
-    searchKeyWord() {
-
+    searchKeyword(newText) {
+        console.log("Search Keyword is: " + newText);
     }
 
-    selectListItem() {
-        this.setState({uiCode: 2});
+    selectListItem(rowID) {
+        this.setState(DataHandle.getDiaryAtIndex(rowID));
     }
 
     showDiaryList() {
-        return <DiaryList selectListItem={this.selectListItem} writeDiary={this.writeDiary}/>;
+        return <DiaryList selectListItem={this.selectListItem}
+                          writeDiary={this.writeDiary}
+                          diaryList={this.state.diaryList}
+                          searchKeyword={this.searchKeyword}/>;
     }
 
     showDiaryReader() {
-        return <DiaryReader diaryMood={this.state.diaryMood} diaryTime={this.state.diaryTime} diaryTitle={this.state.diaryTitle} diaryBody={this.state.diaryBody}
-                            returnPressed={this.returnPressed} readingPreviousPressed={this.readingPreviousPressed} readingNextPressed={this.readingNextPressed} />;
+        return <DiaryReader diaryMood={this.state.diaryMood}
+                            diaryTime={this.state.diaryTime}
+                            diaryTitle={this.state.diaryTitle}
+                            diaryBody={this.state.diaryBody}
+                            returnPressed={this.returnPressed}
+                            readingPreviousPressed={this.readingPreviousPressed}
+                            readingNextPressed={this.readingNextPressed}/>;
     }
 
     showDiaryWriter() {
-        return <DiaryWriter returnPressed={this.returnPressed} saveDiary={this.saveDiaryAndReturn} />;
+        return <DiaryWriter returnPressed={this.returnPressed}
+                            saveDiary={this.saveDiary}/>;
     }
 
     render() {
