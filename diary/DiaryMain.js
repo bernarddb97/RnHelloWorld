@@ -12,10 +12,11 @@ export default class DiaryMain extends Component {
         this.state = {
             uiCode: 1,
             diaryList: [],
+            diarySection: [],
             diaryMood: null,
-            diaryTime: 'Reading...',
-            diaryTitle: 'Reading...',
-            diaryBody: 'Reading...'
+            diaryTime: 'Laoding...',
+            diaryTitle: 'Laoding...',
+            diaryBody: 'Laoding...'
         };
 
         this.bindAllMyFunction();
@@ -33,6 +34,7 @@ export default class DiaryMain extends Component {
     bindAllMyFunction() {
         this.selectListItem = this.selectListItem.bind(this);
         this.writeDiary = this.writeDiary.bind(this);
+        this.clearDiary = this.clearDiary.bind(this);
         this.returnPressed = this.returnPressed.bind(this);
         this.saveDiary = this.saveDiary.bind(this);
         this.readingPreviousPressed = this.readingPreviousPressed.bind(this);
@@ -59,8 +61,16 @@ export default class DiaryMain extends Component {
     }
 
     saveDiary(diaryMood, diaryTitle, diaryBody) {
+        console.log('**********DiaryMain.saveDiary() is called.**********');
         DataHandle.saveDiary(diaryMood, diaryTitle, diaryBody).then(
             (result) => {
+                Alert.alert(
+                    '通知',
+                    '日记保存成功。',
+                    [
+                        {text: '关闭'}
+                    ]
+                );
                 this.setState(result);
             }
         ).catch(
@@ -68,18 +78,22 @@ export default class DiaryMain extends Component {
                 console.log("Save Diary failed. Message:" + error.message);
             }
         );
-
-        Alert.alert(
-            '通知',
-            '日记保存成功。',
-            [
-                {text: '关闭'}
-            ]
-        );
     }
 
     writeDiary() {
         this.setState({uiCode: 3});
+    }
+
+    clearDiary() {
+        DataHandle.clearDiary().then(
+            (result) => {
+                this.setState(result);
+            }
+        ).catch(
+            (error) => {
+                console.log("Clear Diary failed. Message:" + error.message);
+            }
+        );
     }
 
     searchKeyword(newText) {
@@ -93,7 +107,9 @@ export default class DiaryMain extends Component {
     showDiaryList() {
         return <DiaryList selectListItem={this.selectListItem}
                           writeDiary={this.writeDiary}
+                          clearDiary={this.clearDiary}
                           diaryList={this.state.diaryList}
+                          diarySection={this.state.diarySection}
                           searchKeyword={this.searchKeyword}/>;
     }
 

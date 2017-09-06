@@ -37,7 +37,7 @@ let DiaryStyles = StyleSheet.create({
     middleButton: {               //长度适中的Text按钮样式
         height:textSize *1.4 ,
         backgroundColor: 'gray',
-        width:textSize*5,
+        width:textSize*4,
         borderRadius: 8,
         textAlign:'center',
         fontSize: textSize
@@ -98,11 +98,34 @@ let DiaryStyles = StyleSheet.create({
     searchBarTextInput: {   //搜索关键字输入框样式定义
         backgroundColor: 'white',
         borderColor: 'black', 
-        height:textSize *1.4 ,   
-        width: textSize*10,
+        height:textSize*1.4 ,
+        width: textSize*9,
         paddingTop: 0,        //如果不设置，在Android平台TextInput组件内输入显示异常
         paddingBottom: 0,     //如果不设置，在Android平台TextInput组件内输入显示异常        
         fontSize: 14,
-    }
+    },
+    section: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    sectionText: {
+        color: 'black',
+        backgroundColor: '#AAAAFF',
+        fontSize: 14,
+        textAlign: 'center'
+    },
+    sectionHeaderText: {
+        color: 'black',
+        backgroundColor: '#AAFFAA',
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    separatorStyle: {
+        height: 5,
+        borderWidth: 1,
+        borderColor: 'green',
+        borderRadius: 2,
+        backgroundColor: '#00CCCC',
+    },
 });
 export { DiaryStyles as default };

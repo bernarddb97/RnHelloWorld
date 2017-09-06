@@ -1229,7 +1229,7 @@ require(12                 ); // 12 = ./diary/DiaryMain
 __d(/* HelloWorld/diary/DiaryMain.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryMain.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\diary\\DiaryMain.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -1264,10 +1264,11 @@ var DiaryMain = function (_Component) {
         _this.state = {
             uiCode: 1,
             diaryList: [],
+            diarySection: [],
             diaryMood: null,
-            diaryTime: 'Reading...',
-            diaryTitle: 'Reading...',
-            diaryBody: 'Reading...'
+            diaryTime: 'Laoding...',
+            diaryTitle: 'Laoding...',
+            diaryBody: 'Laoding...'
         };
 
         _this.bindAllMyFunction();
@@ -1284,6 +1285,7 @@ var DiaryMain = function (_Component) {
         value: function bindAllMyFunction() {
             this.selectListItem = this.selectListItem.bind(this);
             this.writeDiary = this.writeDiary.bind(this);
+            this.clearDiary = this.clearDiary.bind(this);
             this.returnPressed = this.returnPressed.bind(this);
             this.saveDiary = this.saveDiary.bind(this);
             this.readingPreviousPressed = this.readingPreviousPressed.bind(this);
@@ -1316,18 +1318,29 @@ var DiaryMain = function (_Component) {
         value: function saveDiary(diaryMood, diaryTitle, diaryBody) {
             var _this2 = this;
 
+            console.log('**********DiaryMain.saveDiary() is called.**********');
             _DataHandler2.default.saveDiary(diaryMood, diaryTitle, diaryBody).then(function (result) {
+                _reactNative.Alert.alert('通知', '日记保存成功。', [{ text: '关闭' }]);
                 _this2.setState(result);
             }).catch(function (error) {
                 console.log("Save Diary failed. Message:" + error.message);
             });
-
-            _reactNative.Alert.alert('通知', '日记保存成功。', [{ text: '关闭' }]);
         }
     }, {
         key: 'writeDiary',
         value: function writeDiary() {
             this.setState({ uiCode: 3 });
+        }
+    }, {
+        key: 'clearDiary',
+        value: function clearDiary() {
+            var _this3 = this;
+
+            _DataHandler2.default.clearDiary().then(function (result) {
+                _this3.setState(result);
+            }).catch(function (error) {
+                console.log("Clear Diary failed. Message:" + error.message);
+            });
         }
     }, {
         key: 'searchKeyword',
@@ -1344,10 +1357,12 @@ var DiaryMain = function (_Component) {
         value: function showDiaryList() {
             return _react2.default.createElement(_DiaryList2.default, { selectListItem: this.selectListItem,
                 writeDiary: this.writeDiary,
+                clearDiary: this.clearDiary,
                 diaryList: this.state.diaryList,
+                diarySection: this.state.diarySection,
                 searchKeyword: this.searchKeyword, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 94
+                    lineNumber: 108
                 }
             });
         }
@@ -1362,7 +1377,7 @@ var DiaryMain = function (_Component) {
                 readingPreviousPressed: this.readingPreviousPressed,
                 readingNextPressed: this.readingNextPressed, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 101
+                    lineNumber: 117
                 }
             });
         }
@@ -1372,7 +1387,7 @@ var DiaryMain = function (_Component) {
             return _react2.default.createElement(_DiaryWriter2.default, { returnPressed: this.returnPressed,
                 saveDiary: this.saveDiary, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 111
+                    lineNumber: 127
                 }
             });
         }
@@ -6562,7 +6577,7 @@ module.exports = logError;
 __d(/* ActivityIndicator */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ActivityIndicator\\ActivityIndicator.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ActivityIndicator\\ActivityIndicator.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -23835,7 +23850,7 @@ module.exports = ReactNativeStackEntry;
 __d(/* View */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\View\\View.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\View\\View.js';
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
 var PropTypes = require(20          ); // 20 = prop-types
@@ -25281,7 +25296,7 @@ module.exports = requireNativeComponent;
 __d(/* UnimplementedView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\UnimplementedViews\\UnimplementedView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\UnimplementedViews\\UnimplementedView.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 
@@ -32814,7 +32829,7 @@ module.exports = ReactNativeStackEntry;
 __d(/* ReactNativeART */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ART\\ReactNativeART.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ART\\ReactNativeART.js';
 var Color = require(175             ); // 175 = art/core/color
 var Path = require(176                  ); // 176 = ARTSerializablePath
 var Transform = require(179                 ); // 179 = art/core/transform
@@ -34154,7 +34169,7 @@ module.exports = Class({
 __d(/* Button */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Button.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Button.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -34301,7 +34316,7 @@ module.exports = Button;
 __d(/* Text */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Text\\Text.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Text\\Text.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
@@ -34537,7 +34552,7 @@ __d(/* Touchable */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\Touchable.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\Touchable.js';
 var BoundingDimensions = require(183                 ); // 183 = BoundingDimensions
 var Platform = require(38        ); // 38 = Platform
 var Position = require(185       ); // 185 = Position
@@ -35541,7 +35556,7 @@ module.exports = ensurePositiveDelayProps;
 __d(/* TouchableOpacity */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableOpacity.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableOpacity.js';
 
 
 var Animated = require(194       ); // 194 = Animated
@@ -35721,7 +35736,7 @@ module.exports = Animated;
 __d(/* AnimatedImplementation */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Animated\\src\\AnimatedImplementation.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Animated\\src\\AnimatedImplementation.js';
 var InteractionManager = require(196                 ); // 196 = InteractionManager
 var Interpolation = require(198            ); // 198 = Interpolation
 var NativeAnimatedHelper = require(199                   ); // 199 = NativeAnimatedHelper
@@ -39076,7 +39091,7 @@ module.exports = function bezier(mX1, mY1, mX2, mY2) {
 __d(/* Image */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\Image.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\Image.android.js';
 
 var regeneratorRuntime = require(71                   ); // 71 = regenerator-runtime
 
@@ -39373,7 +39388,7 @@ module.exports = filterObject;
 __d(/* ScrollView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollView.js';
 var Animated = require(194       ); // 194 = Animated
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
@@ -40185,7 +40200,7 @@ module.exports = __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactNativeC
 __d(/* ScrollViewStickyHeader */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollViewStickyHeader.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollViewStickyHeader.js';
 var Animated = require(194       ); // 194 = Animated
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -40306,7 +40321,7 @@ __d(/* DatePickerIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DatePicker\\DatePickerIOS.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DatePicker\\DatePickerIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -40367,7 +40382,7 @@ module.exports = DummyDatePickerIOS;
 __d(/* DrawerLayoutAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DrawerAndroid\\DrawerLayoutAndroid.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DrawerAndroid\\DrawerLayoutAndroid.android.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -40813,7 +40828,7 @@ module.exports = StatusBar;
 __d(/* FlatList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
 var MetroListView = require(220            ); // 220 = MetroListView
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
@@ -41062,7 +41077,7 @@ module.exports = FlatList;
 __d(/* MetroListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\MetroListView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\MetroListView.js';
 var ListView = require(221       ); // 221 = ListView
 var React = require(130    ); // 130 = React
 var RefreshControl = require(226             ); // 226 = RefreshControl
@@ -41252,7 +41267,7 @@ module.exports = MetroListView;
 __d(/* ListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\ListView\\ListView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\ListView\\ListView.js';
 var ListViewDataSource = require(222                 ); // 222 = ListViewDataSource
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -42046,7 +42061,7 @@ module.exports = cloneReferencedElement;
 __d(/* RefreshControl */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\RefreshControl\\RefreshControl.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\RefreshControl\\RefreshControl.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -42141,7 +42156,7 @@ module.exports = RefreshControl;
 __d(/* VirtualizedList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
 var Batchinator = require(228          ); // 228 = Batchinator
 var FillRateHelper = require(229             ); // 229 = FillRateHelper
 var PropTypes = require(20          ); // 20 = prop-types
@@ -43697,7 +43712,7 @@ module.exports = VirtualizeUtils;
 __d(/* ImageBackground */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\ImageBackground.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\ImageBackground.js';
 var Image = require(205    ); // 205 = Image
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -43817,7 +43832,7 @@ module.exports = ImageStore;
 __d(/* KeyboardAvoidingView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Keyboard\\KeyboardAvoidingView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Keyboard\\KeyboardAvoidingView.js';
 var createReactClass = require(155                 ); // 155 = create-react-class
 var Keyboard = require(55        ); // 55 = Keyboard
 var LayoutAnimation = require(236              ); // 236 = LayoutAnimation
@@ -44098,7 +44113,7 @@ module.exports = LayoutAnimation;
 __d(/* Modal */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Modal\\Modal.js',
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Modal\\Modal.js',
     _container;
 
 var AppContainer = require(238           ); // 238 = AppContainer
@@ -44257,7 +44272,7 @@ __d(/* AppContainer */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\AppContainer.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\AppContainer.js';
 var EmitterSubscription = require(50                   ); // 50 = EmitterSubscription
 var PropTypes = require(20          ); // 20 = prop-types
 var RCTDeviceEventEmitter = require(48                     ); // 48 = RCTDeviceEventEmitter
@@ -44409,7 +44424,7 @@ __d(/* Inspector */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\Inspector.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\Inspector.js';
 var Dimensions = require(160         ); // 160 = Dimensions
 var InspectorOverlay = require(240               ); // 240 = InspectorOverlay
 var InspectorPanel = require(244             ); // 244 = InspectorPanel
@@ -44693,7 +44708,7 @@ module.exports = Inspector;
 __d(/* InspectorOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorOverlay.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorOverlay.js';
 var Dimensions = require(160         ); // 160 = Dimensions
 var ElementBox = require(241         ); // 241 = ElementBox
 var PropTypes = require(20          ); // 20 = prop-types
@@ -44784,7 +44799,7 @@ module.exports = InspectorOverlay;
 __d(/* ElementBox */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementBox.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementBox.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -44880,7 +44895,7 @@ module.exports = ElementBox;
 __d(/* BorderBox */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BorderBox.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BorderBox.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 
@@ -44964,7 +44979,7 @@ module.exports = resolveBoxStyle;
 __d(/* InspectorPanel */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorPanel.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorPanel.js';
 var ElementProperties = require(245                ); // 245 = ElementProperties
 var NetworkOverlay = require(253             ); // 253 = NetworkOverlay
 var PerformanceOverlay = require(256                 ); // 256 = PerformanceOverlay
@@ -45204,7 +45219,7 @@ module.exports = InspectorPanel;
 __d(/* ElementProperties */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementProperties.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementProperties.js';
 var BoxInspector = require(246           ); // 246 = BoxInspector
 var PropTypes = require(20          ); // 20 = prop-types
 var React = require(130    ); // 130 = React
@@ -45424,7 +45439,7 @@ module.exports = ElementProperties;
 __d(/* BoxInspector */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BoxInspector.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BoxInspector.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -45641,7 +45656,7 @@ module.exports = BoxInspector;
 __d(/* StyleInspector */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\StyleInspector.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\StyleInspector.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -45756,7 +45771,7 @@ module.exports = StyleInspector;
 __d(/* TouchableHighlight */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableHighlight.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableHighlight.js';
 
 
 var ColorPropType = require(63             ); // 63 = ColorPropType
@@ -46032,7 +46047,7 @@ module.exports = openFileInEditor;
 __d(/* NetworkOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\NetworkOverlay.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\NetworkOverlay.js';
 var ListView = require(221       ); // 221 = ListView
 var React = require(130    ); // 130 = React
 var ScrollView = require(207         ); // 207 = ScrollView
@@ -46961,7 +46976,7 @@ module.exports = XHRInterceptor;
 __d(/* PerformanceOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\PerformanceOverlay.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\PerformanceOverlay.js';
 var PerformanceLogger = require(111                ); // 111 = PerformanceLogger
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -47055,7 +47070,7 @@ __d(/* YellowBox */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\YellowBox.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\YellowBox.js';
 var EventEmitter = require(49            ); // 49 = EventEmitter
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -47709,7 +47724,7 @@ __d(/* Picker */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\Picker.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\Picker.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var PickerIOS = require(261        ); // 261 = PickerIOS
 var PickerAndroid = require(262            ); // 262 = PickerAndroid
@@ -47840,7 +47855,7 @@ __d(/* PickerAndroid */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\PickerAndroid.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\PickerAndroid.android.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var React = require(130    ); // 130 = React
 var ReactPropTypes = require(20          ); // 20 = prop-types
@@ -47991,7 +48006,7 @@ module.exports = PickerAndroid;
 __d(/* ProgressBarAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressBarAndroid\\ProgressBarAndroid.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressBarAndroid\\ProgressBarAndroid.android.js';
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var React = require(130    ); // 130 = React
 var PropTypes = require(20          ); // 20 = prop-types
@@ -48066,7 +48081,7 @@ __d(/* ProgressViewIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressViewIOS\\ProgressViewIOS.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressViewIOS\\ProgressViewIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -48127,7 +48142,7 @@ module.exports = DummyProgressViewIOS;
 __d(/* SectionList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
 var MetroListView = require(220            ); // 220 = MetroListView
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -48211,7 +48226,7 @@ module.exports = SectionList;
 __d(/* VirtualizedSectionList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var VirtualizedList = require(227              ); // 227 = VirtualizedList
@@ -48586,7 +48601,7 @@ __d(/* SegmentedControlIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\SegmentedControlIOS\\SegmentedControlIOS.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\SegmentedControlIOS\\SegmentedControlIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -48647,7 +48662,7 @@ module.exports = DummySegmentedControlIOS;
 __d(/* Slider */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Slider\\Slider.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Slider\\Slider.js';
 var Image = require(205    ); // 205 = Image
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
@@ -48788,7 +48803,7 @@ module.exports = require(157                ); // 157 = UnimplementedView
 __d(/* Switch */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Switch\\Switch.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Switch\\Switch.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -48899,7 +48914,7 @@ module.exports = Switch;
 __d(/* SwipeableListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableListView.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableListView.js';
 var ListView = require(221       ); // 221 = ListView
 var PropTypes = require(20          ); // 20 = prop-types
 var React = require(130    ); // 130 = React
@@ -49153,7 +49168,7 @@ module.exports = SwipeableListViewDataSource;
 __d(/* SwipeableRow */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableRow.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableRow.js';
 var Animated = require(194       ); // 194 = Animated
 var I18nManager = require(258          ); // 258 = I18nManager
 var PanResponder = require(274           ); // 274 = PanResponder
@@ -49603,7 +49618,7 @@ __d(/* TabBarIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarIOS.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var TabBarItemIOS = require(277            ); // 277 = TabBarItemIOS
@@ -49649,7 +49664,7 @@ __d(/* TabBarItemIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarItemIOS.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarItemIOS.android.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -49703,7 +49718,7 @@ module.exports = DummyTab;
 __d(/* TextInput */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TextInput\\TextInput.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TextInput\\TextInput.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var DocumentSelectionState = require(279                     ); // 279 = DocumentSelectionState
 var EventEmitter = require(49            ); // 49 = EventEmitter
@@ -50632,7 +50647,7 @@ __d(/* ToolbarAndroid */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ToolbarAndroid\\ToolbarAndroid.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ToolbarAndroid\\ToolbarAndroid.android.js';
 var Image = require(205    ); // 205 = Image
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var React = require(130    ); // 130 = React
@@ -50742,7 +50757,7 @@ module.exports = ToolbarAndroid;
 __d(/* ViewPagerAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ViewPager\\ViewPagerAndroid.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ViewPager\\ViewPagerAndroid.android.js';
 var React = require(130    ); // 130 = React
 var PropTypes = require(20          ); // 20 = prop-types
 var ReactNative = require(66           ); // 66 = ReactNative
@@ -50867,7 +50882,7 @@ module.exports = ViewPagerAndroid;
 __d(/* WebView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\WebView\\WebView.android.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\WebView\\WebView.android.js';
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
 var ActivityIndicator = require(62                 ); // 62 = ActivityIndicator
 var React = require(130    ); // 130 = React
@@ -51473,7 +51488,7 @@ __d(/* renderApplication */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\renderApplication.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\renderApplication.js';
 var AppContainer = require(238           ); // 238 = AppContainer
 var React = require(130    ); // 130 = React
 var ReactNative = require(66           ); // 66 = ReactNative
@@ -52657,7 +52672,7 @@ module.exports = __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.takeSnapshot
 __d(/* HelloWorld/diary/DiaryList.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryList.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\diary\\DiaryList.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -52683,6 +52698,9 @@ var DiaryList = function (_Component) {
             diaryListDS: new _reactNative.ListView.DataSource({
                 rowHasChanged: function rowHasChanged(oldRow, newRow) {
                     return oldRow !== newRow;
+                },
+                sectionHeaderHasChanged: function sectionHeaderHasChanged(oldSH, newSH) {
+                    return oldSH !== newSH;
                 }
             })
         };
@@ -52694,19 +52712,19 @@ var DiaryList = function (_Component) {
     babelHelpers.createClass(DiaryList, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            console.log("DiaryList.componentWillMount() is called.");
+            console.log("**********DiaryList.componentWillMount() is called.**********");
             if (this.props.diaryList !== null) {
                 this.setState({
-                    diaryListDS: this.state.diaryListDS.cloneWithRows(this.props.diaryList)
+                    diaryListDS: this.state.diaryListDS.cloneWithRowsAndSections(this.props.diaryList, this.props.diarySection)
                 });
             }
         }
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            console.log("DiaryList.componentWillReceiveProps() is called.");
+            console.log("**********DiaryList.componentWillReceiveProps() is called.**********");
             this.setState({
-                diaryListDS: this.state.diaryListDS.cloneWithRows(nextProps.diaryList)
+                diaryListDS: this.state.diaryListDS.cloneWithRowsAndSections(nextProps.diaryList, nextProps.diarySection)
             });
         }
     }, {
@@ -52719,39 +52737,40 @@ var DiaryList = function (_Component) {
         value: function renderListItem(rowData, sectionID, rowID) {
             var _this2 = this;
 
+            console.log("**********DiaryList.renderListItem() is called.**********");
             return _react2.default.createElement(
                 _reactNative.TouchableOpacity,
                 { onPress: function onPress() {
                         return _this2.props.selectListItem(rowID);
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 42
+                        lineNumber: 46
                     }
                 },
                 _react2.default.createElement(
                     _reactNative.View,
                     { style: _DiaryStyles2.default.secondRow, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 43
+                            lineNumber: 47
                         }
                     },
                     _react2.default.createElement(_reactNative.Image, { style: _DiaryStyles2.default.moodStyle, source: rowData.diaryMood, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 44
+                            lineNumber: 48
                         }
                     }),
                     _react2.default.createElement(
                         _reactNative.View,
                         { style: _DiaryStyles2.default.subViewInReader, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 45
+                                lineNumber: 49
                             }
                         },
                         _react2.default.createElement(
                             _reactNative.Text,
                             { style: _DiaryStyles2.default.textInReader, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 46
+                                    lineNumber: 50
                                 }
                             },
                             rowData.diaryTitle
@@ -52760,7 +52779,7 @@ var DiaryList = function (_Component) {
                             _reactNative.Text,
                             { style: _DiaryStyles2.default.textInReader, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 49
+                                    lineNumber: 53
                                 }
                             },
                             rowData.diaryTime
@@ -52770,37 +52789,109 @@ var DiaryList = function (_Component) {
             );
         }
     }, {
+        key: 'renderHeader',
+        value: function renderHeader() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.section, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 64
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: _DiaryStyles2.default.sectionText, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 65
+                        }
+                    },
+                    '\u6211\u662FHeader\u6211\u662FHeader'
+                )
+            );
+        }
+    }, {
+        key: 'renderFooter',
+        value: function renderFooter() {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.section, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 74
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: _DiaryStyles2.default.sectionText, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 75
+                        }
+                    },
+                    '\u6211\u662FFooter\u6211\u662FFooter'
+                )
+            );
+        }
+    }, {
+        key: 'renderSectionHeader',
+        value: function renderSectionHeader(sectionData, sectionID) {
+            return _react2.default.createElement(
+                _reactNative.View,
+                { style: _DiaryStyles2.default.section, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 84
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.Text,
+                    { style: _DiaryStyles2.default.sectionHeaderText, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 85
+                        }
+                    },
+                    sectionID
+                )
+            );
+        }
+    }, {
+        key: 'renderSeparator',
+        value: function renderSeparator() {
+            return _react2.default.createElement(_reactNative.View, { style: _DiaryStyles2.default.separatorStyle, __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 94
+                }
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
                 _reactNative.View,
                 { style: _DiaryStyles2.default.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 60
+                        lineNumber: 100
                     }
                 },
                 _react2.default.createElement(_reactNative.StatusBar, { hidden: true, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 61
+                        lineNumber: 101
                     }
                 }),
                 _react2.default.createElement(
                     _reactNative.View,
                     { style: _DiaryStyles2.default.firstRow, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 62
+                            lineNumber: 102
                         }
                     },
                     _react2.default.createElement(
                         _reactNative.View,
                         { style: { borderWidth: 1 }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 63
+                                lineNumber: 103
                             }
                         },
                         _react2.default.createElement(_reactNative.TextInput, { placeholder: '\u8F93\u5165\u641C\u7D22\u5173\u952E\u5B57', style: _DiaryStyles2.default.searchBarTextInput, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 64
+                                lineNumber: 104
                             }
                         })
                     ),
@@ -52808,36 +52899,56 @@ var DiaryList = function (_Component) {
                         _reactNative.TouchableOpacity,
                         { onPress: this.props.writeDiary, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 66
+                                lineNumber: 106
                             }
                         },
                         _react2.default.createElement(
                             _reactNative.Text,
                             { style: _DiaryStyles2.default.middleButton, __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 67
+                                    lineNumber: 107
                                 }
                             },
                             '\u5199\u65E5\u8BB0'
                         )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { onPress: this.props.clearDiary, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 111
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            { style: _DiaryStyles2.default.middleButton, __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 112
+                                }
+                            },
+                            '\u6E05\u7A7A'
+                        )
                     )
                 ),
-                this.props.diaryList.length > 0 ? _react2.default.createElement(_reactNative.ListView, { dataSource: this.state.diaryListDS, renderRow: this.renderListItem, __source: {
+                this.props.diaryList.length > 0 ? _react2.default.createElement(_reactNative.ListView, { dataSource: this.state.diaryListDS, renderRow: this.renderListItem,
+                    renderHeader: this.renderHeader, renderFooter: this.renderFooter,
+                    renderSectionHeader: this.renderSectionHeader,
+                    renderSeparator: this.renderSeparator, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 74
+                        lineNumber: 119
                     }
                 }) : _react2.default.createElement(
                     _reactNative.View,
                     { style: { flex: 1, justifyContent: 'center' }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 75
+                            lineNumber: 123
                         }
                     },
                     _react2.default.createElement(
                         _reactNative.Text,
                         { style: { fontSize: 18 }, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 76
+                                lineNumber: 124
                             }
                         },
                         '\u8FD8\u6CA1\u6709\u65E5\u8BB0\uFF0C\u5FEB\u53BB\u5199\u4E00\u7BC7\u5427\u3002'
@@ -52889,7 +53000,7 @@ var DiaryStyles = _reactNative.StyleSheet.create({
     middleButton: {
         height: textSize * 1.4,
         backgroundColor: 'gray',
-        width: textSize * 5,
+        width: textSize * 4,
         borderRadius: 8,
         textAlign: 'center',
         fontSize: textSize
@@ -52951,10 +53062,33 @@ var DiaryStyles = _reactNative.StyleSheet.create({
         backgroundColor: 'white',
         borderColor: 'black',
         height: textSize * 1.4,
-        width: textSize * 10,
+        width: textSize * 9,
         paddingTop: 0,
         paddingBottom: 0,
         fontSize: 14
+    },
+    section: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    sectionText: {
+        color: 'black',
+        backgroundColor: '#AAAAFF',
+        fontSize: 14,
+        textAlign: 'center'
+    },
+    sectionHeaderText: {
+        color: 'black',
+        backgroundColor: '#AAFFAA',
+        fontSize: 16,
+        textAlign: 'center'
+    },
+    separatorStyle: {
+        height: 5,
+        borderWidth: 1,
+        borderColor: 'green',
+        borderRadius: 2,
+        backgroundColor: '#00CCCC'
     }
 });
 exports.default = DiaryStyles;
@@ -52964,7 +53098,7 @@ __d(/* HelloWorld/image/madagascar_01.png */function(global, require, module, ex
 __d(/* HelloWorld/diary/DiaryReader.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryReader.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\diary\\DiaryReader.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -53116,7 +53250,7 @@ exports.default = DiaryReader;
 __d(/* HelloWorld/diary/DiaryWriter.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\diary\\DiaryWriter.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\diary\\DiaryWriter.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -53333,28 +53467,61 @@ var DataHandler = function (_Component) {
     babelHelpers.createClass(DataHandler, null, [{
         key: 'getAllTheDiary',
         value: function getAllTheDiary() {
-            console.log('DataHandle.getAllTheDiary() is called.');
+            console.log('**********DataHandle.getAllTheDiary() is called.**********');
             return new Promise(function (resolve, reject) {
                 _reactNative.AsyncStorage.getAllKeys().then(function (keys) {
                     if (keys.length === 0) {
                         resolve(DataHandler.realDiaryList);
                     } else {
                         _reactNative.AsyncStorage.multiGet(keys).then(function (results) {
-                            for (var idx = 0; idx < results.length; idx++) {
-                                DataHandler.realDiaryList[idx] = results[idex][1];
-                            }
                             DataHandler.listIndex = results.length - 1;
 
-                            DataHandler.bubleSortDiaryList();
-                            resolve(DataHandler.realDiaryList);
+                            var diaryObj = void 0,
+                                sectionID = void 0;
+                            for (var i = 0; i < results.length; i++) {
+                                diaryObj = results[i][1];
+                                sectionID = diaryObj.sectionID;
+                                DataHandler.realDiaryList[i] = diaryObj;
+                                if (DataHandler.realDiaryList[sectionID] == undefined) {
+                                    DataHandler.realDiaryList[sectionID] = [];
+                                }
+                                DataHandler.realDiaryList[sectionID].push(diaryObj);
+
+                                if (!DataHandler.realDiarySection.includes(sectionID)) {
+                                    DataHandler.realDiarySection.push(sectionID);
+                                }
+
+                                console.log("==================================DataHandler.getAllTheDiary() Item " + i + ".index: " + diaryObj.index);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() Item " + i + ".sectionID: " + diaryObj.sectionID);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() Item " + i + ".diaryMood: " + diaryObj.diaryMood);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() Item " + i + ".diaryTime: " + diaryObj.diaryTime);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() Item " + i + ".diaryTitle: " + diaryObj.diaryTitle);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() Item " + i + ".diaryBody: " + diaryObj.diaryBody);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() DataHandler.realDiaryList.length: " + DataHandler.realDiaryList.length);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() DataHandler.realDiarySection.length: " + DataHandler.realDiarySection.length);
+                                console.log("==================================DataHandlerDataHandler.getAllTheDiary() DataHandler.realDiaryList[" + sectionID + "].length: " + DataHandler.realDiaryList[sectionID].length);
+                            }
+
+                            resolve({
+                                diaryList: DataHandler.realDiaryList,
+                                diarySection: DataHandler.realDiarySection
+                            });
                         }).catch(function (error) {
                             console.log("DataHandler.getAllTheDiary() AsyncStorage.multiGet() Failed. Message:" + error.message);
-                            resolve(DataHandler.realDiaryList);
+
+                            resolve({
+                                diaryList: DataHandler.realDiaryList,
+                                diarySection: DataHandler.realDiarySection
+                            });
                         });
                     }
                 }).catch(function (error) {
                     console.log("DataHandler.getAllTheDiary() AsyncStorage.getAllKeys() Failed. Message:" + error.message);
-                    resolve(DataHandler.realDiaryList);
+
+                    resolve({
+                        diaryList: DataHandler.realDiaryList,
+                        diarySection: DataHandler.realDiarySection
+                    });
                 });
             });
         }
@@ -53377,13 +53544,8 @@ var DataHandler = function (_Component) {
         value: function getPreviousDiary() {
             if (DataHandler.listIndex > 0) {
                 DataHandler.listIndex--;
-                var diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
-                return {
-                    diaryMood: diaryObj.diaryMood,
-                    diaryTime: diaryObj.diaryTime,
-                    diaryTitle: diaryObj.diaryTitle,
-                    diaryBody: diaryObj.diaryBody
-                };
+
+                return DataHandler.realDiaryList[DataHandler.listIndex];
             }
             return null;
         }
@@ -53392,19 +53554,15 @@ var DataHandler = function (_Component) {
         value: function getNextDiary() {
             if (DataHandler.listIndex < DataHandler.realDiaryList.length - 1) {
                 DataHandler.listIndex++;
-                var diaryObj = DataHandler.realDiaryList[DataHandler.listIndex];
-                return {
-                    diaryMood: diaryObj.diaryMood,
-                    diaryTime: diaryObj.diaryTime,
-                    diaryTitle: diaryObj.diaryTitle,
-                    diaryBody: diaryObj.diaryBody
-                };
+
+                return DataHandler.realDiaryList[DataHandler.listIndex];
             }
             return null;
         }
     }, {
         key: 'getDiaryAtIndex',
         value: function getDiaryAtIndex(index) {
+            console.log('**********DataHandle.getDiaryAtIndex() is called.**********');
             DataHandler.listIndex = index;
             var diaryObj = DataHandler.realDiaryList[index];
             return {
@@ -53418,30 +53576,59 @@ var DataHandler = function (_Component) {
     }, {
         key: 'saveDiary',
         value: function saveDiary(diaryMood, diaryTitle, diaryBody) {
-            console.log('DataHandle.saveDiary() is called.');
+            console.log('**********DataHandle.saveDiary() is called.**********');
             return new Promise(function (resolve, reject) {
                 var sysDate = new Date();
                 var timeString = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月" + sysDate.getDate() + "日 " + sysDate.getHours() + ":" + sysDate.getMinutes() + ":" + sysDate.getSeconds();
+                var sectionID = sysDate.getHours() + ":" + sysDate.getMinutes();
 
-                var diaryObj = new Object();
-                diaryObj.index = Date.parse(sysDate);
-                diaryObj.diaryTime = timeString;
-                diaryObj.diaryMood = diaryMood;
-                diaryObj.diaryTitle = diaryTitle;
-                diaryObj.diaryBody = diaryBody;
-                diaryObj.sectionID = sysDate.getFullYear() + "年" + (sysDate.getMonth() + 1) + "月";
+                var diaryObj = {
+                    index: Date.parse(sysDate),
+                    sectionID: sectionID,
+                    diaryTime: timeString,
+                    diaryMood: diaryMood,
+                    diaryTitle: diaryTitle,
+                    diaryBody: diaryBody
+                };
 
                 _reactNative.AsyncStorage.setItem('' + diaryObj.index, JSON.stringify(diaryObj)).then(function () {
                     var totalLength = DataHandler.realDiaryList.length;
                     DataHandler.realDiaryList[totalLength] = diaryObj;
                     DataHandler.listIndex = totalLength;
 
+                    if (DataHandler.realDiaryList[sectionID] == undefined) {
+                        DataHandler.realDiaryList[sectionID] = [];
+                    }
+                    DataHandler.realDiaryList[sectionID].push(diaryObj);
+
+                    if (!DataHandler.realDiarySection.includes(sectionID)) {
+                        DataHandler.realDiarySection.push(sectionID);
+                    }
+
                     resolve({
                         uiCode: 1,
-                        diaryList: DataHandler.realDiaryList
+                        diaryList: DataHandler.realDiaryList,
+                        diarySection: DataHandler.realDiarySection
                     });
                 }).catch(function (error) {
                     console.log("DataHandler.saveDiary() Failed. Message:" + error.message);
+                });
+            });
+        }
+    }, {
+        key: 'clearDiary',
+        value: function clearDiary() {
+            console.log('**********DataHandle.clearDiary() is called.**********');
+            return new Promise(function (resolve, reject) {
+                _reactNative.AsyncStorage.clear().then(function () {
+                    DataHandler.realDiaryList = [];
+                    DataHandler.realDiarySection = [];
+                    resolve({
+                        diaryList: DataHandler.realDiaryList,
+                        diarySection: DataHandler.realDiarySection
+                    });
+                }).catch(function (error) {
+                    console.log("DataHandler.clearDiary() Failed. Message:" + error.message);
                 });
             });
         }
@@ -53450,6 +53637,7 @@ var DataHandler = function (_Component) {
 }(_react.Component);
 
 DataHandler.realDiaryList = [];
+DataHandler.realDiarySection = [];
 DataHandler.listIndex = 0;
 exports.default = DataHandler;
 }, 319, null, "HelloWorld/diary/DataHandler.js");

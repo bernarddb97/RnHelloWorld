@@ -10,7 +10,8 @@ export default class DiaryList extends Component {
         super(props);
         this.state = {
             diaryListDS: new ListView.DataSource({
-                rowHasChanged: (oldRow, newRow) => oldRow !== newRow
+                rowHasChanged: (oldRow, newRow) => oldRow !== newRow,
+                sectionHeaderHasChanged: (oldSH, newSH) => oldSH !== newSH
             })
         }
         this.updateSearchKeyword = this.updateSearchKeyword.bind(this);
@@ -18,18 +19,20 @@ export default class DiaryList extends Component {
     }
 
     componentWillMount() {
-        console.log("DiaryList.componentWillMount() is called.");
+        console.log("**********DiaryList.componentWillMount() is called.**********");
         if (this.props.diaryList !== null) {
             this.setState({
-                diaryListDS: this.state.diaryListDS.cloneWithRows(this.props.diaryList)
+                // diaryListDS: this.state.diaryListDS.cloneWithRows(this.props.diaryList)
+                diaryListDS: this.state.diaryListDS.cloneWithRowsAndSections(this.props.diaryList, this.props.diarySection)
             });
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("DiaryList.componentWillReceiveProps() is called.");
+        console.log("**********DiaryList.componentWillReceiveProps() is called.**********");
         this.setState({
-            diaryListDS: this.state.diaryListDS.cloneWithRows(nextProps.diaryList)
+            // diaryListDS: this.state.diaryListDS.cloneWithRows(nextProps.diaryList)
+            diaryListDS: this.state.diaryListDS.cloneWithRowsAndSections(nextProps.diaryList, nextProps.diarySection)
         });
     }
 
@@ -38,6 +41,7 @@ export default class DiaryList extends Component {
     }
 
     renderListItem(rowData, sectionID, rowID) {
+        console.log("**********DiaryList.renderListItem() is called.**********");
         return (
             <TouchableOpacity onPress={() => this.props.selectListItem(rowID)}>
                 <View style={DiaryStyles.secondRow}>
@@ -55,6 +59,42 @@ export default class DiaryList extends Component {
         );
     }
 
+    renderHeader() {
+        return (
+            <View style={DiaryStyles.section}>
+                <Text style={DiaryStyles.sectionText}>
+                    我是Header我是Header
+                </Text>
+            </View>
+        );
+    }
+
+    renderFooter() {
+        return (
+            <View style={DiaryStyles.section}>
+                <Text style={DiaryStyles.sectionText}>
+                    我是Footer我是Footer
+                </Text>
+            </View>
+        );
+    }
+
+    renderSectionHeader(sectionData, sectionID) {
+        return (
+            <View style={DiaryStyles.section}>
+                <Text style={DiaryStyles.sectionHeaderText}>
+                    {sectionID}
+                </Text>
+            </View>
+        );
+    }
+
+    renderSeparator() {
+        return (
+            <View style={DiaryStyles.separatorStyle} />
+        );
+    }
+
     render() {
         return (
             <View style={DiaryStyles.container}>
@@ -68,10 +108,18 @@ export default class DiaryList extends Component {
                             写日记
                         </Text>
                     </TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.clearDiary}>
+                        <Text style={DiaryStyles.middleButton}>
+                            清空
+                        </Text>
+                    </TouchableOpacity>
                 </View>
                 {(
                     (this.props.diaryList.length > 0) ?
-                        (<ListView dataSource={this.state.diaryListDS} renderRow={this.renderListItem}/>) :
+                        (<ListView dataSource={this.state.diaryListDS} renderRow={this.renderListItem}
+                                   renderHeader={this.renderHeader} renderFooter={this.renderFooter}
+                                   renderSectionHeader={this.renderSectionHeader}
+                                   renderSeparator={this.renderSeparator}/>) :
                         (<View style={{flex: 1, justifyContent: 'center'}}>
                             <Text style={{fontSize: 18}}>
                                 还没有日记，快去写一篇吧。
