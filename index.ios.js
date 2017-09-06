@@ -6,5 +6,6 @@
 // require("./chapter6/chapter6_6.js");
 // require("./chapter7/chapter7_1.js");
 // require("./chapter8/chapter8_1.js");
-require("./chapter10/chapter10_4.js");
+// require("./chapter10/chapter10_4.js");
+require("./chapter10/chapter10_7.js");
 // require("./diary/DiaryMain");
