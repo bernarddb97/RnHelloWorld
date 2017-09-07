@@ -1224,12 +1224,12 @@ babelHelpers.toConsumableArray = function (arr) {
 };
 })(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 __d(/* HelloWorld/index.android.js */function(global, require, module, exports) {
-require(12                          ); // 12 = ./chapter11/chapter11_1.js
+require(12                          ); // 12 = ./chapter12/chapter12_3.js
 }, 0, null, "HelloWorld/index.android.js");
-__d(/* HelloWorld/chapter11/chapter11_1.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* HelloWorld/chapter12/chapter12_3.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'd:\\Work\\HelloWorld\\chapter11\\chapter11_1.js';
+var _jsxFileName = 'd:\\Work\\HelloWorld\\chapter12\\chapter12_3.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -1247,56 +1247,53 @@ var HelloWorld = function (_Component) {
 
         var _this = babelHelpers.possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this, props));
 
-        _this.watcher = null;
         _this.state = {
-            progress: 0
+            responseText: ''
         };
-
-        _this._onPanResponderGrant = _this._onPanResponderGrant.bind(_this);
-        _this._onPanResponderMove = _this._onPanResponderMove.bind(_this);
         return _this;
     }
 
     babelHelpers.createClass(HelloWorld, [{
         key: 'componentWillMount',
         value: function componentWillMount() {
-            this.watcher = _reactNative.PanResponder.create({
-                onStartShouldSetPanResponder: function onStartShouldSetPanResponder() {
-                    return true;
-                },
-                onPanResponderGrant: this._onPanResponderGrant,
-                onPanResponderMove: this._onPanResponderMove
+            var _this2 = this;
+
+            var REQUEST_URL = 'http://192.168.1.158:8090/chapter12_3.json';
+
+            var privateHeaders = {
+                Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Encoding': 'gzip, deflate',
+                'Accept-Language': 'en-US,en;q=0.5',
+                Connection: '\tkeep-alive',
+                'Content-Type': 'text/plain',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0'
+            };
+
+            var map = {
+                method: 'POST',
+                headers: privateHeaders,
+                follow: 20,
+                timeout: 0,
+                size: 0,
+                body: 'This is the Request Body.'
+            };
+
+            fetch(REQUEST_URL, map).then(function (result) {
+                console.log("result.url:" + result.url);
+                console.log("result.ok:" + result.ok);
+                console.log("result.status:" + result.status);
+
+
+                result.json().then(function (json) {
+                    _this2.setState({
+                        responseText: JSON.stringify(json)
+                    });
+                }).catch(function (error) {
+                    console.log('result.json(): ' + error.message);
+                });
+            }).catch(function (error) {
+                console.log('fetch API Error:' + error.message);
             });
-        }
-    }, {
-        key: '_onPanResponderGrant',
-        value: function _onPanResponderGrant(event, gestureState) {
-            console.log("********** _onPanResponderGrant is called. **********");
-            var progress = void 0;
-            var pointX = gestureState.x0;
-            if (pointX < 20) {
-                progress = 0;
-            } else if (pointX > totolWidth - 20) {
-                progress = 1;
-            } else {
-                progress = (pointX - 20) / (totolWidth - 40);
-            }
-            this.setState({ progress: progress });
-        }
-    }, {
-        key: '_onPanResponderMove',
-        value: function _onPanResponderMove(event, gestureState) {
-            console.log("********** _onPanResponderGrant is called. **********");
-            var progress = void 0;
-            var pointX = gestureState.moveX;
-            if (pointX < 20) {
-                progress = 0;
-            } else if (pointX > totolWidth - 20) {
-                progress = 1;
-            } else {
-                progress = (pointX - 20) / (totolWidth - 40);
-            }
-            this.setState({ progress: progress });
         }
     }, {
         key: 'render',
@@ -1305,36 +1302,18 @@ var HelloWorld = function (_Component) {
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 69
+                        lineNumber: 66
                     }
                 },
-                _reactNative.Platform.OS === 'ios' ? _react2.default.createElement(_reactNative.ProgressViewIOS, { style: styles.progressBarStyle, progress: this.state.progress, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 74
-                    }
-                }) : _react2.default.createElement(_reactNative.ProgressBarAndroid, { style: styles.progressBarStyle, styleAttr: 'Horizontal',
-                    indeterminate: false, progress: this.state.progress, __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 76
-                    }
-                }),
                 _react2.default.createElement(
                     _reactNative.Text,
                     { style: styles.textStyle, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 81
+                            lineNumber: 67
                         }
                     },
-                    'You ave set Progress to ',
-                    Math.round(this.state.progress * 100),
-                    '%.'
-                ),
-                _react2.default.createElement(_reactNative.View, babelHelpers.extends({ style: styles.progressViewStyle }, this.watcher.panHandlers, {
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 84
-                    }
-                }))
+                    this.state.responseText
+                )
             );
         }
     }]);
@@ -1348,30 +1327,15 @@ var styles = _reactNative.StyleSheet.create({
     container: {
         flex: 1
     },
-    progressBarStyle: {
-        width: totolWidth - 40,
-        left: 20,
-        top: 50
-    },
-    progressViewStyle: {
-        backgroundColor: 'transparent',
-        position: 'absolute',
-        width: totolWidth - 20,
-        left: 10,
-        top: 30,
-        height: 40
-    },
     textStyle: {
-        fontSize: 20,
-        left: 20,
-        top: 70
+        fontSize: 20
     }
 });
 
 _reactNative.AppRegistry.registerComponent('HelloWorld', function () {
     return HelloWorld;
 });
-}, 12, null, "HelloWorld/chapter11/chapter11_1.js");
+}, 12, null, "HelloWorld/chapter12/chapter12_3.js");
 __d(/* react/index.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV === 'production') {
