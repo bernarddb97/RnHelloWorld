@@ -1224,20 +1224,18 @@ babelHelpers.toConsumableArray = function (arr) {
 };
 })(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 __d(/* HelloWorld/index.android.js */function(global, require, module, exports) {
-require(12                          ); // 12 = ./chapter12/chapter12_3.js
+require(12                        ); // 12 = ./chapter9/chapter9_4.js
 }, 0, null, "HelloWorld/index.android.js");
-__d(/* HelloWorld/chapter12/chapter12_3.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* HelloWorld/chapter9/chapter9_4.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'd:\\Work\\HelloWorld\\chapter12\\chapter12_3.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter9\\chapter9_4.js';
 
 var _react = require(13     ); // 13 = react
 
 var _react2 = babelHelpers.interopRequireDefault(_react);
 
 var _reactNative = require(27            ); // 27 = react-native
-
-var totolWidth = _reactNative.Dimensions.get('window').width;
 
 var HelloWorld = function (_Component) {
     babelHelpers.inherits(HelloWorld, _Component);
@@ -1248,51 +1246,17 @@ var HelloWorld = function (_Component) {
         var _this = babelHelpers.possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this, props));
 
         _this.state = {
-            responseText: ''
+            switchValue: true
         };
+        _this._onValueChange = _this._onValueChange.bind(_this);
         return _this;
     }
 
     babelHelpers.createClass(HelloWorld, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            var _this2 = this;
-
-            var REQUEST_URL = 'http://192.168.1.158:8090/chapter12_3.json';
-
-            var privateHeaders = {
-                Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Encoding': 'gzip, deflate',
-                'Accept-Language': 'en-US,en;q=0.5',
-                Connection: '\tkeep-alive',
-                'Content-Type': 'text/plain',
-                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0'
-            };
-
-            var map = {
-                method: 'POST',
-                headers: privateHeaders,
-                follow: 20,
-                timeout: 0,
-                size: 0,
-                body: 'This is the Request Body.'
-            };
-
-            fetch(REQUEST_URL, map).then(function (result) {
-                console.log("result.url:" + result.url);
-                console.log("result.ok:" + result.ok);
-                console.log("result.status:" + result.status);
-
-
-                result.json().then(function (json) {
-                    _this2.setState({
-                        responseText: JSON.stringify(json)
-                    });
-                }).catch(function (error) {
-                    console.log('result.json(): ' + error.message);
-                });
-            }).catch(function (error) {
-                console.log('fetch API Error:' + error.message);
+        key: '_onValueChange',
+        value: function _onValueChange() {
+            this.setState({
+                switchValue: !this.state.switchValue
             });
         }
     }, {
@@ -1302,17 +1266,26 @@ var HelloWorld = function (_Component) {
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 66
+                        lineNumber: 22
                     }
                 },
                 _react2.default.createElement(
-                    _reactNative.Text,
-                    { style: styles.textStyle, __source: {
+                    _reactNative.View,
+                    { style: { height: 200 }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 67
+                            lineNumber: 23
                         }
                     },
-                    this.state.responseText
+                    _react2.default.createElement(_reactNative.Switch, { style: styles.switchStyle, value: this.state.switchValue, onValueChange: this._onValueChange, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 24
+                        }
+                    }),
+                    _react2.default.createElement(_reactNative.Switch, { style: styles.switchStyle, value: !this.state.switchValue, onValueChange: this._onValueChange, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 25
+                        }
+                    })
                 )
             );
         }
@@ -1327,15 +1300,15 @@ var styles = _reactNative.StyleSheet.create({
     container: {
         flex: 1
     },
-    textStyle: {
-        fontSize: 20
+    switchStyle: {
+        margin: 20
     }
 });
 
 _reactNative.AppRegistry.registerComponent('HelloWorld', function () {
     return HelloWorld;
 });
-}, 12, null, "HelloWorld/chapter12/chapter12_3.js");
+}, 12, null, "HelloWorld/chapter9/chapter9_4.js");
 __d(/* react/index.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV === 'production') {
@@ -6498,7 +6471,7 @@ module.exports = logError;
 __d(/* ActivityIndicator */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ActivityIndicator\\ActivityIndicator.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ActivityIndicator\\ActivityIndicator.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -23771,7 +23744,7 @@ module.exports = ReactNativeStackEntry;
 __d(/* View */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\View\\View.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\View\\View.js';
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
 var PropTypes = require(20          ); // 20 = prop-types
@@ -25217,7 +25190,7 @@ module.exports = requireNativeComponent;
 __d(/* UnimplementedView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\UnimplementedViews\\UnimplementedView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\UnimplementedViews\\UnimplementedView.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 
@@ -32750,7 +32723,7 @@ module.exports = ReactNativeStackEntry;
 __d(/* ReactNativeART */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ART\\ReactNativeART.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ART\\ReactNativeART.js';
 var Color = require(175             ); // 175 = art/core/color
 var Path = require(176                  ); // 176 = ARTSerializablePath
 var Transform = require(179                 ); // 179 = art/core/transform
@@ -34090,7 +34063,7 @@ module.exports = Class({
 __d(/* Button */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Button.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Button.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -34237,7 +34210,7 @@ module.exports = Button;
 __d(/* Text */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Text\\Text.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Text\\Text.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
@@ -34473,7 +34446,7 @@ __d(/* Touchable */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\Touchable.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\Touchable.js';
 var BoundingDimensions = require(183                 ); // 183 = BoundingDimensions
 var Platform = require(38        ); // 38 = Platform
 var Position = require(185       ); // 185 = Position
@@ -35477,7 +35450,7 @@ module.exports = ensurePositiveDelayProps;
 __d(/* TouchableOpacity */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableOpacity.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableOpacity.js';
 
 
 var Animated = require(194       ); // 194 = Animated
@@ -35657,7 +35630,7 @@ module.exports = Animated;
 __d(/* AnimatedImplementation */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Animated\\src\\AnimatedImplementation.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Animated\\src\\AnimatedImplementation.js';
 var InteractionManager = require(196                 ); // 196 = InteractionManager
 var Interpolation = require(198            ); // 198 = Interpolation
 var NativeAnimatedHelper = require(199                   ); // 199 = NativeAnimatedHelper
@@ -39012,7 +38985,7 @@ module.exports = function bezier(mX1, mY1, mX2, mY2) {
 __d(/* Image */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\Image.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\Image.android.js';
 
 var regeneratorRuntime = require(71                   ); // 71 = regenerator-runtime
 
@@ -39309,7 +39282,7 @@ module.exports = filterObject;
 __d(/* ScrollView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollView.js';
 var Animated = require(194       ); // 194 = Animated
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
@@ -40121,7 +40094,7 @@ module.exports = __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactNativeC
 __d(/* ScrollViewStickyHeader */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollViewStickyHeader.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ScrollView\\ScrollViewStickyHeader.js';
 var Animated = require(194       ); // 194 = Animated
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -40242,7 +40215,7 @@ __d(/* DatePickerIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DatePicker\\DatePickerIOS.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DatePicker\\DatePickerIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -40303,7 +40276,7 @@ module.exports = DummyDatePickerIOS;
 __d(/* DrawerLayoutAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DrawerAndroid\\DrawerLayoutAndroid.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\DrawerAndroid\\DrawerLayoutAndroid.android.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -40749,7 +40722,7 @@ module.exports = StatusBar;
 __d(/* FlatList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\FlatList.js';
 var MetroListView = require(220            ); // 220 = MetroListView
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
@@ -40998,7 +40971,7 @@ module.exports = FlatList;
 __d(/* MetroListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\MetroListView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\MetroListView.js';
 var ListView = require(221       ); // 221 = ListView
 var React = require(130    ); // 130 = React
 var RefreshControl = require(226             ); // 226 = RefreshControl
@@ -41188,7 +41161,7 @@ module.exports = MetroListView;
 __d(/* ListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\ListView\\ListView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\ListView\\ListView.js';
 var ListViewDataSource = require(222                 ); // 222 = ListViewDataSource
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -41982,7 +41955,7 @@ module.exports = cloneReferencedElement;
 __d(/* RefreshControl */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\RefreshControl\\RefreshControl.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\RefreshControl\\RefreshControl.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -42077,7 +42050,7 @@ module.exports = RefreshControl;
 __d(/* VirtualizedList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedList.js';
 var Batchinator = require(228          ); // 228 = Batchinator
 var FillRateHelper = require(229             ); // 229 = FillRateHelper
 var PropTypes = require(20          ); // 20 = prop-types
@@ -43633,7 +43606,7 @@ module.exports = VirtualizeUtils;
 __d(/* ImageBackground */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\ImageBackground.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Image\\ImageBackground.js';
 var Image = require(205    ); // 205 = Image
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -43753,7 +43726,7 @@ module.exports = ImageStore;
 __d(/* KeyboardAvoidingView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Keyboard\\KeyboardAvoidingView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Keyboard\\KeyboardAvoidingView.js';
 var createReactClass = require(155                 ); // 155 = create-react-class
 var Keyboard = require(55        ); // 55 = Keyboard
 var LayoutAnimation = require(236              ); // 236 = LayoutAnimation
@@ -44034,7 +44007,7 @@ module.exports = LayoutAnimation;
 __d(/* Modal */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Modal\\Modal.js',
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Modal\\Modal.js',
     _container;
 
 var AppContainer = require(238           ); // 238 = AppContainer
@@ -44193,7 +44166,7 @@ __d(/* AppContainer */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\AppContainer.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\AppContainer.js';
 var EmitterSubscription = require(50                   ); // 50 = EmitterSubscription
 var PropTypes = require(20          ); // 20 = prop-types
 var RCTDeviceEventEmitter = require(48                     ); // 48 = RCTDeviceEventEmitter
@@ -44345,7 +44318,7 @@ __d(/* Inspector */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\Inspector.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\Inspector.js';
 var Dimensions = require(160         ); // 160 = Dimensions
 var InspectorOverlay = require(240               ); // 240 = InspectorOverlay
 var InspectorPanel = require(244             ); // 244 = InspectorPanel
@@ -44629,7 +44602,7 @@ module.exports = Inspector;
 __d(/* InspectorOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorOverlay.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorOverlay.js';
 var Dimensions = require(160         ); // 160 = Dimensions
 var ElementBox = require(241         ); // 241 = ElementBox
 var PropTypes = require(20          ); // 20 = prop-types
@@ -44720,7 +44693,7 @@ module.exports = InspectorOverlay;
 __d(/* ElementBox */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementBox.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementBox.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -44816,7 +44789,7 @@ module.exports = ElementBox;
 __d(/* BorderBox */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BorderBox.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BorderBox.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 
@@ -44900,7 +44873,7 @@ module.exports = resolveBoxStyle;
 __d(/* InspectorPanel */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorPanel.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\InspectorPanel.js';
 var ElementProperties = require(245                ); // 245 = ElementProperties
 var NetworkOverlay = require(253             ); // 253 = NetworkOverlay
 var PerformanceOverlay = require(256                 ); // 256 = PerformanceOverlay
@@ -45140,7 +45113,7 @@ module.exports = InspectorPanel;
 __d(/* ElementProperties */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementProperties.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\ElementProperties.js';
 var BoxInspector = require(246           ); // 246 = BoxInspector
 var PropTypes = require(20          ); // 20 = prop-types
 var React = require(130    ); // 130 = React
@@ -45360,7 +45333,7 @@ module.exports = ElementProperties;
 __d(/* BoxInspector */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BoxInspector.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\BoxInspector.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -45577,7 +45550,7 @@ module.exports = BoxInspector;
 __d(/* StyleInspector */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\StyleInspector.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\StyleInspector.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -45692,7 +45665,7 @@ module.exports = StyleInspector;
 __d(/* TouchableHighlight */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableHighlight.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Touchable\\TouchableHighlight.js';
 
 
 var ColorPropType = require(63             ); // 63 = ColorPropType
@@ -45968,7 +45941,7 @@ module.exports = openFileInEditor;
 __d(/* NetworkOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\NetworkOverlay.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\NetworkOverlay.js';
 var ListView = require(221       ); // 221 = ListView
 var React = require(130    ); // 130 = React
 var ScrollView = require(207         ); // 207 = ScrollView
@@ -46897,7 +46870,7 @@ module.exports = XHRInterceptor;
 __d(/* PerformanceOverlay */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\PerformanceOverlay.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Inspector\\PerformanceOverlay.js';
 var PerformanceLogger = require(111                ); // 111 = PerformanceLogger
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -46991,7 +46964,7 @@ __d(/* YellowBox */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\YellowBox.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\YellowBox.js';
 var EventEmitter = require(49            ); // 49 = EventEmitter
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -47645,7 +47618,7 @@ __d(/* Picker */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\Picker.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\Picker.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var PickerIOS = require(261        ); // 261 = PickerIOS
 var PickerAndroid = require(262            ); // 262 = PickerAndroid
@@ -47776,7 +47749,7 @@ __d(/* PickerAndroid */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\PickerAndroid.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Picker\\PickerAndroid.android.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var React = require(130    ); // 130 = React
 var ReactPropTypes = require(20          ); // 20 = prop-types
@@ -47927,7 +47900,7 @@ module.exports = PickerAndroid;
 __d(/* ProgressBarAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressBarAndroid\\ProgressBarAndroid.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressBarAndroid\\ProgressBarAndroid.android.js';
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var React = require(130    ); // 130 = React
 var PropTypes = require(20          ); // 20 = prop-types
@@ -48002,7 +47975,7 @@ __d(/* ProgressViewIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressViewIOS\\ProgressViewIOS.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ProgressViewIOS\\ProgressViewIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -48063,7 +48036,7 @@ module.exports = DummyProgressViewIOS;
 __d(/* SectionList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\SectionList.js';
 var MetroListView = require(220            ); // 220 = MetroListView
 var Platform = require(38        ); // 38 = Platform
 var React = require(130    ); // 130 = React
@@ -48147,7 +48120,7 @@ module.exports = SectionList;
 __d(/* VirtualizedSectionList */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Lists\\VirtualizedSectionList.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var VirtualizedList = require(227              ); // 227 = VirtualizedList
@@ -48522,7 +48495,7 @@ __d(/* SegmentedControlIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\SegmentedControlIOS\\SegmentedControlIOS.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\SegmentedControlIOS\\SegmentedControlIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var Text = require(181   ); // 181 = Text
@@ -48583,7 +48556,7 @@ module.exports = DummySegmentedControlIOS;
 __d(/* Slider */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Slider\\Slider.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Slider\\Slider.js';
 var Image = require(205    ); // 205 = Image
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
@@ -48724,7 +48697,7 @@ module.exports = require(157                ); // 157 = UnimplementedView
 __d(/* Switch */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Switch\\Switch.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\Switch\\Switch.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var Platform = require(38        ); // 38 = Platform
@@ -48835,7 +48808,7 @@ module.exports = Switch;
 __d(/* SwipeableListView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableListView.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableListView.js';
 var ListView = require(221       ); // 221 = ListView
 var PropTypes = require(20          ); // 20 = prop-types
 var React = require(130    ); // 130 = React
@@ -49089,7 +49062,7 @@ module.exports = SwipeableListViewDataSource;
 __d(/* SwipeableRow */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableRow.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Experimental\\SwipeableRow\\SwipeableRow.js';
 var Animated = require(194       ); // 194 = Animated
 var I18nManager = require(258          ); // 258 = I18nManager
 var PanResponder = require(274           ); // 274 = PanResponder
@@ -49539,7 +49512,7 @@ __d(/* TabBarIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarIOS.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarIOS.android.js';
 var React = require(130    ); // 130 = React
 var StyleSheet = require(158         ); // 158 = StyleSheet
 var TabBarItemIOS = require(277            ); // 277 = TabBarItemIOS
@@ -49585,7 +49558,7 @@ __d(/* TabBarItemIOS */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarItemIOS.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TabBarIOS\\TabBarItemIOS.android.js';
 var React = require(130    ); // 130 = React
 var View = require(129   ); // 129 = View
 var StyleSheet = require(158         ); // 158 = StyleSheet
@@ -49639,7 +49612,7 @@ module.exports = DummyTab;
 __d(/* TextInput */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TextInput\\TextInput.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\TextInput\\TextInput.js';
 var ColorPropType = require(63             ); // 63 = ColorPropType
 var DocumentSelectionState = require(279                     ); // 279 = DocumentSelectionState
 var EventEmitter = require(49            ); // 49 = EventEmitter
@@ -50568,7 +50541,7 @@ __d(/* ToolbarAndroid */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ToolbarAndroid\\ToolbarAndroid.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ToolbarAndroid\\ToolbarAndroid.android.js';
 var Image = require(205    ); // 205 = Image
 var NativeMethodsMixin = require(65                  ); // 65 = NativeMethodsMixin
 var React = require(130    ); // 130 = React
@@ -50678,7 +50651,7 @@ module.exports = ToolbarAndroid;
 __d(/* ViewPagerAndroid */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ViewPager\\ViewPagerAndroid.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\ViewPager\\ViewPagerAndroid.android.js';
 var React = require(130    ); // 130 = React
 var PropTypes = require(20          ); // 20 = prop-types
 var ReactNative = require(66           ); // 66 = ReactNative
@@ -50803,7 +50776,7 @@ module.exports = ViewPagerAndroid;
 __d(/* WebView */function(global, require, module, exports) {
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\WebView\\WebView.android.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\Components\\WebView\\WebView.android.js';
 var EdgeInsetsPropType = require(147                 ); // 147 = EdgeInsetsPropType
 var ActivityIndicator = require(62                 ); // 62 = ActivityIndicator
 var React = require(130    ); // 130 = React
@@ -51409,7 +51382,7 @@ __d(/* renderApplication */function(global, require, module, exports) {
 
 'use strict';
 
-var _jsxFileName = 'd:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\renderApplication.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\node_modules\\react-native\\Libraries\\ReactNative\\renderApplication.js';
 var AppContainer = require(238           ); // 238 = AppContainer
 var React = require(130    ); // 130 = React
 var ReactNative = require(66           ); // 66 = ReactNative
