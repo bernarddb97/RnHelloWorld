@@ -1224,12 +1224,12 @@ babelHelpers.toConsumableArray = function (arr) {
 };
 })(typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 __d(/* HelloWorld/index.android.js */function(global, require, module, exports) {
-require(12                        ); // 12 = ./chapter9/chapter9_4.js
+require(12                          ); // 12 = ./chapter13/chapter13_1.js
 }, 0, null, "HelloWorld/index.android.js");
-__d(/* HelloWorld/chapter9/chapter9_4.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
+__d(/* HelloWorld/chapter13/chapter13_1.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter9\\chapter9_4.js';
+var _jsxFileName = 'D:\\Work\\HelloWorld\\chapter13\\chapter13_1.js';
 
 var _react = require(13     ); // 13 = react
 
@@ -1246,46 +1246,178 @@ var HelloWorld = function (_Component) {
         var _this = babelHelpers.possibleConstructorReturn(this, (HelloWorld.__proto__ || Object.getPrototypeOf(HelloWorld)).call(this, props));
 
         _this.state = {
-            switchValue: true
+            source: {
+                uri: 'http://es6.ruanyifeng.com'
+            }
         };
-        _this._onValueChange = _this._onValueChange.bind(_this);
+
+        _this.status = 'No Page Loaded.';
+        _this.backButtonEnabled = false;
+        _this.forwardButtonEnabled = false;
+        _this.inputUrl = 'http://es6.ruanyifeng.com';
+
+        _this.goBack = _this.goBack.bind(_this);
+        _this.goForward = _this.goForward.bind(_this);
+        _this.onNavigationStateChange = _this.onNavigationStateChange.bind(_this);
+        _this.onPressGoButton = _this.onPressGoButton.bind(_this);
         return _this;
     }
 
     babelHelpers.createClass(HelloWorld, [{
-        key: '_onValueChange',
-        value: function _onValueChange() {
+        key: 'goBack',
+        value: function goBack() {
+            this.refs.webViewRef.goBack();
+        }
+    }, {
+        key: 'goForward',
+        value: function goForward() {
+            this.refs.webViewRef.goForward();
+        }
+    }, {
+        key: 'onNavigationStateChange',
+        value: function onNavigationStateChange(navState) {
             this.setState({
-                switchValue: !this.state.switchValue
+                status: navState.title,
+                backButtonEnabled: navState.canGoBack,
+                forwardButtonEnabled: navState.canGoForward
             });
+        }
+    }, {
+        key: 'onPressGoButton',
+        value: function onPressGoButton() {
+            if (this.inputUrl == this.state.source.uri) {
+                console.log("*****************this.inputUrl:" + this.inputUrl);
+                this.refs.webViewRef.reload();
+            } else {
+                var source = {};
+                source.uri = this.inputUrl;
+                console.log("*****************source.uri:" + source.uri);
+                this.setState({ source: source });
+            }
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             return _react2.default.createElement(
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 22
+                        lineNumber: 56
                     }
                 },
+                _react2.default.createElement(_reactNative.StatusBar, { hidden: true, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 57
+                    }
+                }),
                 _react2.default.createElement(
                     _reactNative.View,
-                    { style: { height: 200 }, __source: {
+                    { style: styles.addressBarRow, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 23
+                            lineNumber: 58
                         }
                     },
-                    _react2.default.createElement(_reactNative.Switch, { style: styles.switchStyle, value: this.state.switchValue, onValueChange: this._onValueChange, __source: {
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        {
+                            style: this.state.backButtonEnabled ? styles.navButton : styles.disabledButton,
+                            onPress: this.goBack, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 59
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 62
+                                }
+                            },
+                            '<'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        {
+                            style: this.state.forwardButtonEnabled ? styles.navButton : styles.disabledButton,
+                            onPress: this.goForward, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 66
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 69
+                                }
+                            },
+                            '>'
+                        )
+                    ),
+                    _react2.default.createElement(_reactNative.TextInput, { ref: 'inputUrlRef', style: styles.addressBarText,
+                        underlineColorAndroid: 'white',
+                        defaultValue: this.state.source.uri,
+                        onSubmitEditing: this.onPressGoButton,
+                        onChangeText: function onChangeText(newText) {
+                            return _this2.inputUrl = newText;
+                        },
+                        clearButtonMode: 'while-editing', __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 24
+                            lineNumber: 73
                         }
                     }),
-                    _react2.default.createElement(_reactNative.Switch, { style: styles.switchStyle, value: !this.state.switchValue, onValueChange: this._onValueChange, __source: {
+                    _react2.default.createElement(
+                        _reactNative.TouchableOpacity,
+                        { style: [styles.navButton, { width: 30 }], onPress: this.onPressGoButton, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 79
+                            }
+                        },
+                        _react2.default.createElement(
+                            _reactNative.Text,
+                            {
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 80
+                                }
+                            },
+                            'Go'
+                        )
+                    )
+                ),
+                _react2.default.createElement(_reactNative.WebView, {
+                    ref: 'webViewRef',
+                    style: styles.webView,
+                    source: this.state.source,
+                    javaScriptEnabled: true,
+                    domStorageEnabled: true,
+                    startInLoadingState: true,
+                    onNavigationStateChange: this.onNavigationStateChange, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 85
+                    }
+                }),
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: styles.statusBar, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 25
+                            lineNumber: 93
                         }
-                    })
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: styles.statusBarText, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 94
+                            }
+                        },
+                        this.state.status
+                    )
                 )
             );
         }
@@ -1298,17 +1430,67 @@ exports.default = HelloWorld;
 
 var styles = _reactNative.StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#AAAAFF'
     },
-    switchStyle: {
-        margin: 20
+    addressBarRow: {
+        flexDirection: 'row',
+        margin: 8
+    },
+    webView: {
+        height: 350,
+        backgroundColor: 'white'
+    },
+    addressBarText: {
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderRadius: 3,
+        borderColor: 'transparent',
+        height: 24,
+        fontSize: 16,
+        flex: 1,
+        marginLeft: 5,
+        marginRight: 5,
+        paddingLeft: 10,
+        paddingTop: 3,
+        paddingBottom: 3
+    },
+    navButton: {
+        width: 20,
+        padding: 3,
+        marginRight: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'transparent',
+        borderRadius: 3,
+        backgroundColor: 'white'
+    },
+    disabledButton: {
+        width: 20,
+        padding: 3,
+        marginLeft: 3,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderColor: 'transparent',
+        borderRadius: 3,
+        backgroundColor: 'grey'
+    },
+    statusBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 5,
+        height: 22
+    },
+    statusBarText: {
+        color: 'white',
+        fontSize: 13
     }
 });
 
 _reactNative.AppRegistry.registerComponent('HelloWorld', function () {
     return HelloWorld;
 });
-}, 12, null, "HelloWorld/chapter9/chapter9_4.js");
+}, 12, null, "HelloWorld/chapter13/chapter13_1.js");
 __d(/* react/index.js */function(global, require, module, exports) {'use strict';
 
 if (process.env.NODE_ENV === 'production') {
