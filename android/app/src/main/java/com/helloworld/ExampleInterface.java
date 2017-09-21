@@ -53,9 +53,8 @@ public class ExampleInterface extends ReactContextBaseJavaModule implements Acti
         Log.i("ExampleInterface", "********** Received message from RN: " + aMessage);
 
         Intent intent = new Intent(rnContext, RnStartActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        rnContext.startActivityForResult(intent, 8081, new Bundle());
-        getCurrentActivity().startActivityForResult(intent, 8081, new Bundle());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        rnContext.startActivityForResult(intent, 1, new Bundle());
 
         rnCallback.invoke("AndroidMsg");
     }
@@ -71,9 +70,8 @@ public class ExampleInterface extends ReactContextBaseJavaModule implements Acti
         this.interfacePromise = interfacePromise;
 
         Intent intent = new Intent(rnContext, RnStartActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        rnContext.startActivityForResult(intent, 8081, new Bundle());
-        getCurrentActivity().startActivityForResult(intent, 8081, new Bundle());
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        rnContext.startActivityForResult(intent, 1, new Bundle());
     }
 
     @Nullable
@@ -87,7 +85,7 @@ public class ExampleInterface extends ReactContextBaseJavaModule implements Acti
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         Log.i(this.getClass().getName(), "********** ExampleInterface.onActivityResult() is called.");
-        if (requestCode == 8081 && resultCode == RESULT_OK) {
+        if (requestCode == 1 && resultCode == RESULT_OK) {
             String aMessage = "{\"peerNumber\":\"" + data.getStringExtra("peerNumber") + "\"}";
 
             // Message Mechanism
