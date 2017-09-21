@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Alert, Dimensions, StyleSheet, Text, TextInput, View, DeviceEventEmitter} from 'react-native';
 
-let widthOfMargin = Dimensions.get('window').width * 0.10;
-
 export default class LoginLeaf extends Component {
 
     constructor(props) {
@@ -24,7 +22,7 @@ export default class LoginLeaf extends Component {
     }
 
     updateNumDone() {
-        console.log("updateNumDone(), callback of setState() has been called.");
+//        console.log("updateNumDone(), callback of setState() has been called.");
     }
 
     updatePW(newText) {
@@ -56,16 +54,35 @@ export default class LoginLeaf extends Component {
     }
 
     userPressAddressBook() {
+        // Message Mechanism
         DeviceEventEmitter.addListener('AndroidToRNMessage', this.handlerAndroidMessage.bind(this));
 
         var {NativeModules} = require('react-native');
-        NativeModules.ExampleInterface.handleMessage('Android Native Message');
+
+//        // Callback Mechanism
+//        NativeModules.ExampleInterface.handleMessageCallback('Android Native Message', this.callbackByNativeMethod);
+
+        // Promise Mechanism
+        NativeModules.ExampleInterface.handleMessagePromise('Android Native Message').then(
+            (result) => {
+                console.log('********** Promise Result from Android Native ' + result);
+            }
+        ).catch(
+            (error) => {
+                console.log('********** Promise Error from Android Native ' + error.message + error.code);
+            }
+        );
     }
 
+    // Message Mechanism
     handlerAndroidMessage(aMessage) {
         console.log("Message from Android Native Code: " + aMessage);
         let msgObj = JSON.parse(aMessage);
         this.setState({inputedNum: msgObj.peerNumber});
+    }
+
+    callbackByNativeMethod(anyStr) {
+        console.log("********** callbackByNativeMethod() is called. Param: " + anyStr);
     }
 
     render() {
@@ -105,16 +122,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     textInputStyle: {
-        margin: widthOfMargin,
+        margin: 5,
         backgroundColor: 'gray',
         fontSize: 20,
     },
     textPromptStyle: {
-        margin: widthOfMargin,
+        margin: 5,
         fontSize: 20,
     },
     bigTextPrompt: {
-        margin: widthOfMargin,
+        margin: 5,
         backgroundColor: 'gray',
         color: 'white',
         textAlign: 'center',
