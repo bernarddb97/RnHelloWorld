@@ -18,4 +18,5 @@
 
 
 // require("./diary/DiaryMain");
-require("./master/LoginLeaf.js");
+// require("./master/LoginLeaf.js");
+require("./master/ShowImage.js");
